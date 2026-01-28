@@ -51,11 +51,21 @@ Port the ProGuard retrace tool from Java to TypeScript, with comprehensive test 
     - StackTraceRegularExpressionParserTests.java (test runner)
     - 3 Actual*StackTrace.java files (require external R8 mapping files)
 
-## 2 Bring the Proguard code 
+## Phase 2: Bring the Proguard code ✅
 
 **Reference:** `https://github.com/Guardsquare/proguard/tree/master/retrace`
 
-Create kotlin tests based on the xml files with the official implememtation. If tests do not work well, update tests.
+- [x] Clone ProGuard repository and extract the retrace folder
+  - Successfully cloned from `https://github.com/Guardsquare/proguard.git`
+  - Extracted to `proguard-source/` directory (gitignored)
+  - Contains Java implementation with 4 main files:
+    - `ReTrace.java` - Main entry point for de-obfuscation
+    - `FrameRemapper.java` - Handles mapping information and frame transformation
+    - `FrameInfo.java` - Data class for stack frame information
+    - `FramePattern.java` - Regex-based parsing and formatting of stack frames
+  - Note: Depends on `proguard:base` module for `MappingReader` and `ClassUtil`
+- [ ] Create Java/Kotlin tests based on the XML fixtures with the official implementation
+- [ ] If tests do not work well, update tests
 
 ## Phase 3: create TS tests 
 
