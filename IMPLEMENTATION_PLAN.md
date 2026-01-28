@@ -5,12 +5,12 @@ Port the ProGuard retrace tool from Java to TypeScript, with comprehensive test 
 
 ## Phase 1: Test Data Collection & Setup
 
-### 1.1 Repository Structure Setup
-- [ ] Initialize npm project with TypeScript
-- [ ] Setup testing framework (Jest or Vitest)
-- [ ] Configure build tooling (tsup or rollup)
-- [ ] Setup linting and formatting (ESLint, Prettier)
-- [ ] Create directory structure:
+### 1.1 Repository Structure Setup ✅
+- [x] Initialize npm project with TypeScript
+- [x] Setup testing framework (Jest or Vitest)
+- [x] Configure build tooling (tsup or rollup)
+- [x] Setup linting and formatting (ESLint, Prettier)
+- [x] Create directory structure:
   ```
   /src
     /core          # Core retrace logic
@@ -19,14 +19,16 @@ Port the ProGuard retrace tool from Java to TypeScript, with comprehensive test 
     /tests          # Unit tests
   ```
 
-### 1.2 Collect Test Samples from R8
-- [ ] Clone/download R8 repository test cases from:
+### 1.2 Collect Test Samples from R8 ✅
+- [x] Clone/download R8 repository test cases from:
   - `https://r8.googlesource.com/r8/+/234408b2c185fa4a221d8faf59811822ab65128d/src/test/java/com/android/tools/r8/retrace/stacktraces/`
-- [ ] Extract inline test examples from:
-  - `RetraceRegularExpressionTests.java`
+  - Collected 72 test files implementing `StackTraceForTest` interface
+- [x] Extract inline test examples from:
+  - `StackTraceRegularExpressionParserTests.java`
   - Other test files containing `StackTraceForTest` examples
 - [ ] Download mapping samples from:
   - `third_party/r8mappings.tar.gz` (via Google Storage)
+  - Note: Skipping for now as we have extensive test coverage from the stacktrace files
 
 ### 1.3 Create Test Triples
 - [ ] Parse Java test files to extract:
