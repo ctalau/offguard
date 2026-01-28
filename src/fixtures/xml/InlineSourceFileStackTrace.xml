@@ -1,0 +1,21 @@
+<test name="InlineSourceFileStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>  at b.c(Unknown Source:1)</line>
+  </obfuscated>
+  <mapping>
+    <line>foo.Bar -&gt; a:</line>
+    <line># {\&quot;id\&quot;:\&quot;sourceFile\&quot;,\&quot;fileName\&quot;:\&quot;SourceFile1.kt\&quot;}</line>
+    <line>foo.Baz -&gt; b:</line>
+    <line># {\&quot;id\&quot;:\&quot;sourceFile\&quot;,\&quot;fileName\&quot;:\&quot;SourceFile2.kt\&quot;}</line>
+    <line>    1:1:void foo.Bar.method():22:22 -&gt; c</line>
+    <line>    1:1:void main(java.lang.String[]):32 -&gt; c</line>
+  </mapping>
+  <retraced>
+    <line>  at foo.Bar.method(SourceFile1.kt:22)</line>
+    <line>  at foo.Baz.main(SourceFile2.kt:32)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>  at foo.Bar.void method()(SourceFile1.kt:22)</line>
+    <line>  at foo.Baz.void main(java.lang.String[])(SourceFile2.kt:32)</line>
+  </retracedVerbose>
+</test>

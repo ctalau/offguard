@@ -1,0 +1,40 @@
+<test name="UnknownSourceStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>com.android.tools.r8.CompilationException: foo[parens](Source:3)</line>
+    <line>    at a.a.a(Unknown Source)</line>
+    <line>    at a.a.a(Unknown Source)</line>
+    <line>    at com.android.tools.r8.R8.main(Unknown Source)</line>
+    <line>Caused by: com.android.tools.r8.CompilationException: foo[parens](Source:3)</line>
+    <line>    at a.a.a(Unknown Source)</line>
+    <line>    ... 42 more</line>
+  </obfuscated>
+  <mapping>
+    <line>com.android.tools.r8.R8 -&gt; a.a:</line>
+    <line>  void foo(int) -&gt; a</line>
+    <line>  void bar(int, int) -&gt; a</line>
+  </mapping>
+  <retraced>
+    <line>com.android.tools.r8.CompilationException: foo[parens](Source:3)</line>
+    <line>    at com.android.tools.r8.R8.bar(R8.java)</line>
+    <line>    &lt;OR&gt; at com.android.tools.r8.R8.foo(R8.java)</line>
+    <line>    at com.android.tools.r8.R8.bar(R8.java)</line>
+    <line>    &lt;OR&gt; at com.android.tools.r8.R8.foo(R8.java)</line>
+    <line>    at com.android.tools.r8.R8.main(Unknown Source)</line>
+    <line>Caused by: com.android.tools.r8.CompilationException: foo[parens](Source:3)</line>
+    <line>    at com.android.tools.r8.R8.bar(R8.java)</line>
+    <line>    &lt;OR&gt; at com.android.tools.r8.R8.foo(R8.java)</line>
+    <line>    ... 42 more</line>
+  </retraced>
+  <retracedVerbose>
+    <line>com.android.tools.r8.CompilationException: foo[parens](Source:3)</line>
+    <line>    at com.android.tools.r8.R8.void bar(int,int)(R8.java)</line>
+    <line>    &lt;OR&gt; at com.android.tools.r8.R8.void foo(int)(R8.java)</line>
+    <line>    at com.android.tools.r8.R8.void bar(int,int)(R8.java)</line>
+    <line>    &lt;OR&gt; at com.android.tools.r8.R8.void foo(int)(R8.java)</line>
+    <line>    at com.android.tools.r8.R8.main(Unknown Source)</line>
+    <line>Caused by: com.android.tools.r8.CompilationException: foo[parens](Source:3)</line>
+    <line>    at com.android.tools.r8.R8.void bar(int,int)(R8.java)</line>
+    <line>    &lt;OR&gt; at com.android.tools.r8.R8.void foo(int)(R8.java)</line>
+    <line>    ... 42 more</line>
+  </retracedVerbose>
+</test>

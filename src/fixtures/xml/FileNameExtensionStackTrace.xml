@@ -1,0 +1,51 @@
+<test name="FileNameExtensionStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>a.b.c: Problem when compiling program</line>
+    <line>    at R8.main(App:800)</line>
+    <line>    at R8.main(Native Method)</line>
+    <line>    at R8.main(Main.java:)</line>
+    <line>    at R8.main(Main.kt:1)</line>
+    <line>    at R8.main(Main.foo)</line>
+    <line>    at R8.main()</line>
+    <line>    at R8.main(Unknown)</line>
+    <line>    at R8.main(SourceFile)</line>
+    <line>    at R8.main(SourceFile:1)</line>
+    <line>Suppressed: a.b.c: You have to write the program first</line>
+    <line>    at R8.retrace(App:184)</line>
+    <line>    ... 7 more</line>
+  </obfuscated>
+  <mapping>
+    <line>foo.bar.baz -&gt; a.b.c:</line>
+    <line>R8 -&gt; R8:</line>
+  </mapping>
+  <retraced>
+    <line>foo.bar.baz: Problem when compiling program</line>
+    <line>    at R8.main(R8.java:800)</line>
+    <line>    at R8.main(Native Method)</line>
+    <line>    at R8.main(R8.java)</line>
+    <line>    at R8.main(R8.kt:1)</line>
+    <line>    at R8.main(R8.java)</line>
+    <line>    at R8.main(R8.java)</line>
+    <line>    at R8.main(R8.java)</line>
+    <line>    at R8.main(R8.java)</line>
+    <line>    at R8.main(R8.java:1)</line>
+    <line>Suppressed: foo.bar.baz: You have to write the program first</line>
+    <line>    at R8.retrace(R8.java:184)</line>
+    <line>    ... 7 more</line>
+  </retraced>
+  <retracedVerbose>
+    <line>foo.bar.baz: Problem when compiling program</line>
+    <line>    at R8.main(R8.java:800)</line>
+    <line>    at R8.main(Native Method)</line>
+    <line>    at R8.main(R8.java)</line>
+    <line>    at R8.main(R8.kt:1)</line>
+    <line>    at R8.main(R8.java)</line>
+    <line>    at R8.main(R8.java)</line>
+    <line>    at R8.main(R8.java)</line>
+    <line>    at R8.main(R8.java)</line>
+    <line>    at R8.main(R8.java:1)</line>
+    <line>Suppressed: foo.bar.baz: You have to write the program first</line>
+    <line>    at R8.retrace(R8.java:184)</line>
+    <line>    ... 7 more</line>
+  </retracedVerbose>
+</test>

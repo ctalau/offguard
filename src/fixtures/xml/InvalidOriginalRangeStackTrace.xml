@@ -1,0 +1,18 @@
+<test name="InvalidOriginalRangeStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.main(Main.dummy:3)</line>
+  </obfuscated>
+  <mapping>
+    <line>com.android.tools.r8.naming.retrace.Main -&gt; com.android.tools.r8.naming.retrace.Main:</line>
+    <line>    2:5:void main(java.lang.String[]):5:2 -&gt; main</line>
+  </mapping>
+  <retraced>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.main(Main.java:3)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void main(java.lang.String[])(Main.java:3)</line>
+  </retracedVerbose>
+</test>

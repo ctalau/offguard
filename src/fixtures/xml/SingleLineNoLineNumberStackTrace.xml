@@ -1,0 +1,49 @@
+<test name="SingleLineNoLineNumberStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat foo.a.a(Unknown Source)</line>
+    <line>\tat foo.a.b(Unknown Source)</line>
+    <line>\tat foo.a.c(Unknown Source)</line>
+    <line>\tat foo.a.d(Unknown Source)</line>
+  </obfuscated>
+  <mapping>
+    <line>com.android.tools.r8.naming.retrace.Main -&gt; foo.a:</line>
+    <line>    0:0:void method1(java.lang.String):42:42 -&gt; a</line>
+    <line>    0:0:void main(java.lang.String[]):28 -&gt; a</line>
+    <line>    0:0:void method2(java.lang.String):42:44 -&gt; b</line>
+    <line>    0:0:void main2(java.lang.String[]):29 -&gt; b</line>
+    <line>    void method3(java.lang.String):72:72 -&gt; c</line>
+    <line>    void main3(java.lang.String[]):30 -&gt; c</line>
+    <line>    void main4(java.lang.String[]):153 -&gt; d</line>
+  </mapping>
+  <retraced>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.method1(Main.java:42)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.main(Main.java:28)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.method2(Main.java)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.main2(Main.java)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.main3(Main.java)</line>
+    <line>\t&lt;OR&gt; at com.android.tools.r8.naming.retrace.Main.method3(Main.java)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.main4(Main.java:153)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void</line>
+    <line> method1(java.lang.String)(Main.java:42)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void main(java.lang.String[])(Main.java:28)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void</line>
+    <line> method2(java.lang.String)(Main.java:42)</line>
+    <line>\t&lt;OR&gt; at com.android.tools.r8.naming.retrace.Main.void</line>
+    <line> method2(java.lang.String)(Main.java:43)</line>
+    <line>\t&lt;OR&gt; at com.android.tools.r8.naming.retrace.Main.void</line>
+    <line> method2(java.lang.String)(Main.java:44)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void</line>
+    <line> main2(java.lang.String[])(Main.java:29)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void</line>
+    <line> main3(java.lang.String[])(Main.java:30)</line>
+    <line>\t&lt;OR&gt; at com.android.tools.r8.naming.retrace.Main.void</line>
+    <line> method3(java.lang.String)(Main.java:72)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void</line>
+    <line> main4(java.lang.String[])(Main.java:153)</line>
+  </retracedVerbose>
+</test>

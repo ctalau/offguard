@@ -1,0 +1,27 @@
+<test name="AmbiguousWithSignatureStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>java.lang.IndexOutOfBoundsException</line>
+    <line>\tat java.util.ArrayList.get(ArrayList.java:411)</line>
+    <line>\tat com.android.tools.r8.Internal.zza(Unknown)</line>
+  </obfuscated>
+  <mapping>
+    <line>com.android.tools.r8.Internal -&gt; com.android.tools.r8.Internal:</line>
+    <line>  10:10:void foo(int):10:10 -&gt; zza</line>
+    <line>  11:11:void foo(int, int):11:11 -&gt; zza</line>
+    <line>  12:12:void foo(int, boolean):12:12 -&gt; zza</line>
+    <line>  13:13:boolean foo(int, int):13:13 -&gt; zza</line>
+  </mapping>
+  <retraced>
+    <line>java.lang.IndexOutOfBoundsException</line>
+    <line>\tat java.util.ArrayList.get(ArrayList.java:411)</line>
+    <line>\tat com.android.tools.r8.Internal.foo(Internal.java)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>java.lang.IndexOutOfBoundsException</line>
+    <line>\tat java.util.ArrayList.get(ArrayList.java:411)</line>
+    <line>\tat com.android.tools.r8.Internal.boolean foo(int,int)(Internal.java)</line>
+    <line>\t&lt;OR&gt; at com.android.tools.r8.Internal.void foo(int)(Internal.java)</line>
+    <line>\t&lt;OR&gt; at com.android.tools.r8.Internal.void foo(int,boolean)(Internal.java)</line>
+    <line>\t&lt;OR&gt; at com.android.tools.r8.Internal.void foo(int,int)(Internal.java)</line>
+  </retracedVerbose>
+</test>

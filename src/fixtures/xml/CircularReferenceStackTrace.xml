@@ -1,0 +1,36 @@
+<test name="CircularReferenceStackTrace" expectedWarnings="5">
+  <obfuscated>
+    <line>        [CIRCULAR REFERENCE: A.A]</line>
+    <line> [CIRCULAR REFERENCE: A.B]</line>
+    <line>        [CIRCULAR REFERENCE: None.existing.class]</line>
+    <line>        [CIRCULAR REFERENCE: A.A] </line>
+    <line>        [CIRCU:AA]</line>
+    <line>        [CIRCULAR REFERENCE: A.A</line>
+    <line>        [CIRCULAR REFERENCE: ]</line>
+    <line>        [CIRCULAR REFERENCE: None existing class]</line>
+  </obfuscated>
+  <mapping>
+    <line>foo.bar.Baz -&gt; A.A:</line>
+    <line>foo.bar.Qux -&gt; A.B:</line>
+  </mapping>
+  <retraced>
+    <line>        [CIRCULAR REFERENCE: foo.bar.Baz]</line>
+    <line> [CIRCULAR REFERENCE: foo.bar.Qux]</line>
+    <line>        [CIRCULAR REFERENCE: None.existing.class]</line>
+    <line>        [CIRCULAR REFERENCE: foo.bar.Baz] </line>
+    <line>        [CIRCU:AA]</line>
+    <line>        [CIRCULAR REFERENCE: foo.bar.Baz</line>
+    <line>        [CIRCULAR REFERENCE: ]</line>
+    <line>        [CIRCULAR REFERENCE: None existing class]</line>
+  </retraced>
+  <retracedVerbose>
+    <line>        [CIRCULAR REFERENCE: foo.bar.Baz]</line>
+    <line> [CIRCULAR REFERENCE: foo.bar.Qux]</line>
+    <line>        [CIRCULAR REFERENCE: None.existing.class]</line>
+    <line>        [CIRCULAR REFERENCE: foo.bar.Baz] </line>
+    <line>        [CIRCU:AA]</line>
+    <line>        [CIRCULAR REFERENCE: foo.bar.Baz</line>
+    <line>        [CIRCULAR REFERENCE: ]</line>
+    <line>        [CIRCULAR REFERENCE: None existing class]</line>
+  </retracedVerbose>
+</test>

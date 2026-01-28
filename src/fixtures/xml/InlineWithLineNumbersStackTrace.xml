@@ -1,0 +1,35 @@
+<test name="InlineWithLineNumbersStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.main(InliningRetraceTest.java:7)</line>
+  </obfuscated>
+  <mapping>
+    <line>com.android.tools.r8.naming.retrace.Main -&gt; com.android.tools.r8.naming.retrace.Main:</line>
+    <line>    1:1:void main(java.lang.String[]):101:101 -&gt; main</line>
+    <line>    2:4:void method1(java.lang.String):94:96 -&gt; main</line>
+    <line>    2:4:void main(java.lang.String[]):102 -&gt; main</line>
+    <line>    5:5:void method2(int):86:86 -&gt; main</line>
+    <line>    5:5:void method1(java.lang.String):96 -&gt; main</line>
+    <line>    5:5:void main(java.lang.String[]):102 -&gt; main</line>
+    <line>    6:7:void method3(long):80:81 -&gt; main</line>
+    <line>    6:7:void method2(int):88 -&gt; main</line>
+    <line>    6:7:void method1(java.lang.String):96 -&gt; main</line>
+    <line>    6:7:void main(java.lang.String[]):102 -&gt; main</line>
+  </mapping>
+  <retraced>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.method3(Main.java:81)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.method2(Main.java:88)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.method1(Main.java:96)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.main(Main.java:102)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void method3(long)(Main.java:81)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void method2(int)(Main.java:88)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.</line>
+    <line>void method1(java.lang.String)(Main.java:96)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.</line>
+    <line>void main(java.lang.String[])(Main.java:102)</line>
+  </retracedVerbose>
+</test>

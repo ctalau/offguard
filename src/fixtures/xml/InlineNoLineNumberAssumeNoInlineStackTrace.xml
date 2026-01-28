@@ -1,0 +1,21 @@
+<test name="InlineNoLineNumberAssumeNoInlineStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat a.foo(Unknown Source)</line>
+  </obfuscated>
+  <mapping>
+    <line>retrace.Main -&gt; a:</line>
+    <line>    1:1:void method1(java.lang.String):0:0 -&gt; foo</line>
+    <line>    1:1:void main(java.lang.String[]):0 -&gt; foo</line>
+    <line>    2:2:void method2(int):0:0 -&gt; foo</line>
+    <line>    2:2:void main(java.lang.String[]):0 -&gt; foo</line>
+  </mapping>
+  <retraced>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat retrace.Main.main(Main.java)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat retrace.Main.void main(java.lang.String[])(Main.java)</line>
+  </retracedVerbose>
+</test>

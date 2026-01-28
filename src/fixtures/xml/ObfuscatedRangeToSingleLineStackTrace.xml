@@ -1,0 +1,29 @@
+<test name="ObfuscatedRangeToSingleLineStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>UnknownException: This is just a fake exception</line>
+    <line>  at a.a(:8)</line>
+    <line>  at a.a(:13)</line>
+    <line>  at a.b(:1399)</line>
+  </obfuscated>
+  <mapping>
+    <line>foo.bar.Baz -&gt; a:</line>
+    <line>  1:10:void qux():27:27 -&gt; a</line>
+    <line>  11:15:void qux():42 -&gt; a</line>
+    <line>  1337:1400:void foo.bar.Baz.quux():113:113 -&gt; b</line>
+    <line>  1337:1400:void quuz():72 -&gt; b</line>
+  </mapping>
+  <retraced>
+    <line>UnknownException: This is just a fake exception</line>
+    <line>  at foo.bar.Baz.qux(Baz.java:27)</line>
+    <line>  at foo.bar.Baz.qux(Baz.java:42)</line>
+    <line>  at foo.bar.Baz.quux(Baz.java:113)</line>
+    <line>  at foo.bar.Baz.quuz(Baz.java:72)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>UnknownException: This is just a fake exception</line>
+    <line>  at foo.bar.Baz.void qux()(Baz.java:27)</line>
+    <line>  at foo.bar.Baz.void qux()(Baz.java:42)</line>
+    <line>  at foo.bar.Baz.void quux()(Baz.java:113)</line>
+    <line>  at foo.bar.Baz.void quuz()(Baz.java:72)</line>
+  </retracedVerbose>
+</test>

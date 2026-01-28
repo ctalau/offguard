@@ -1,0 +1,36 @@
+<test name="SourceFileWithNumberAndEmptyStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>  at com.android.tools.r8.R8.a(R.java:34)</line>
+    <line>  at com.android.tools.r8.R8.a(:34)</line>
+  </obfuscated>
+  <mapping>
+    <line>com.android.tools.r8.R8 -&gt; com.android.tools.r8.R8:</line>
+    <line>  34:34:void com.android.tools.r8.utils.ExceptionUtils.withR8CompilationHandler(</line>
+    <line>com.android.tools.r8.utils.Reporter,</line>
+    <line>com.android.tools.r8.utils.ExceptionUtils$CompileAction):59:59 -&gt; a</line>
+    <line>  34:34:void runForTesting(com.android.tools.r8.utils.AndroidApp,</line>
+    <line>com.android.tools.r8.utils.InternalOptions):261 -&gt; a</line>
+  </mapping>
+  <retraced>
+    <line>  at com.android.tools.r8.utils.ExceptionUtils.withR8CompilationHandler(</line>
+    <line>ExceptionUtils.java:59)</line>
+    <line>  at com.android.tools.r8.R8.runForTesting(R8.java:261)</line>
+    <line>  at com.android.tools.r8.utils.ExceptionUtils.withR8CompilationHandler(</line>
+    <line>ExceptionUtils.java:59)</line>
+    <line>  at com.android.tools.r8.R8.runForTesting(R8.java:261)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>  at com.android.tools.r8.utils.ExceptionUtils.void withR8CompilationHandler(</line>
+    <line>com.android.tools.r8.utils.Reporter,</line>
+    <line>com.android.tools.r8.utils.ExceptionUtils$CompileAction)(ExceptionUtils.java:59)</line>
+    <line>  at com.android.tools.r8.R8.void runForTesting(</line>
+    <line>com.android.tools.r8.utils.AndroidApp,</line>
+    <line>com.android.tools.r8.utils.InternalOptions)(R8.java:261)</line>
+    <line>  at com.android.tools.r8.utils.ExceptionUtils.void withR8CompilationHandler(</line>
+    <line>com.android.tools.r8.utils.Reporter,</line>
+    <line>com.android.tools.r8.utils.ExceptionUtils$CompileAction)(ExceptionUtils.java:59)</line>
+    <line>  at com.android.tools.r8.R8.void runForTesting(</line>
+    <line>com.android.tools.r8.utils.AndroidApp,</line>
+    <line>com.android.tools.r8.utils.InternalOptions)(R8.java:261)</line>
+  </retracedVerbose>
+</test>

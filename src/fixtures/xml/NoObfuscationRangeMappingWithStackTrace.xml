@@ -1,0 +1,30 @@
+<test name="NoObfuscationRangeMappingWithStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat foo.a(Bar.dummy:0)</line>
+    <line>\tat foo.b(Foo.dummy:2)</line>
+    <line>\tat foo.c(Baz.dummy:8)</line>
+    <line>\tat foo.d(Qux.dummy:7)</line>
+  </obfuscated>
+  <mapping>
+    <line>com.android.tools.r8.naming.retrace.Main -&gt; foo:</line>
+    <line>    void foo(long):1:1 -&gt; a</line>
+    <line>    void bar(int):3 -&gt; b</line>
+    <line>    void baz():0:0 -&gt; c</line>
+    <line>    void main(java.lang.String[]):0 -&gt; d</line>
+  </mapping>
+  <retraced>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.foo(Main.java:1)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.bar(Main.java:3)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.baz(Main.java)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.main(Main.java)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void foo(long)(Main.java:1)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void bar(int)(Main.java:3)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void baz()(Main.java)</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void main(java.lang.String[])(Main.java)</line>
+  </retracedVerbose>
+</test>

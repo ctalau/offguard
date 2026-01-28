@@ -1,0 +1,35 @@
+<test name="IdentityMappingStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>java.lang.IndexOutOfBoundsException</line>
+    <line>\tat a.a(:10)</line>
+    <line>\tat b.a(:11)</line>
+    <line>\tat c.a(:12)</line>
+  </obfuscated>
+  <mapping>
+    <line>com.android.tools.r8.One -&gt; a:</line>
+    <line>  10:10:void foo(int) -&gt; a</line>
+    <line>com.android.tools.r8.Other -&gt; b:</line>
+    <line>  11:11:void bar(int, int) -&gt; a</line>
+    <line>  11:11:boolean baz(int, int) -&gt; a</line>
+    <line>com.android.tools.r8.Third -&gt; c:</line>
+    <line>  12:12:void qux(int) -&gt; a</line>
+    <line>  12:12:void other(int, int) -&gt; b</line>
+    <line>  12:12:boolean quux(int, int) -&gt; a</line>
+  </mapping>
+  <retraced>
+    <line>java.lang.IndexOutOfBoundsException</line>
+    <line>\tat com.android.tools.r8.One.foo(One.java:10)</line>
+    <line>\tat com.android.tools.r8.Other.bar(Other.java:11)</line>
+    <line>\tat com.android.tools.r8.Other.baz(Other.java:11)</line>
+    <line>\tat com.android.tools.r8.Third.qux(Third.java:12)</line>
+    <line>\tat com.android.tools.r8.Third.quux(Third.java:12)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>java.lang.IndexOutOfBoundsException</line>
+    <line>\tat com.android.tools.r8.One.void foo(int)(One.java:10)</line>
+    <line>\tat com.android.tools.r8.Other.void bar(int,int)(Other.java:11)</line>
+    <line>\tat com.android.tools.r8.Other.boolean baz(int,int)(Other.java:11)</line>
+    <line>\tat com.android.tools.r8.Third.void qux(int)(Third.java:12)</line>
+    <line>\tat com.android.tools.r8.Third.boolean quux(int,int)(Third.java:12)</line>
+  </retracedVerbose>
+</test>

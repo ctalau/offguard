@@ -1,0 +1,19 @@
+<test name="FoundMethodVerboseStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat a.a.a(Foo.java:7)</line>
+  </obfuscated>
+  <mapping>
+    <line>com.android.tools.r8.naming.retrace.Main -&gt; a.a:</line>
+    <line>    7:7:com.android.Foo main(java.lang.String[],com.android.Bar):102 -&gt; a</line>
+  </mapping>
+  <retraced>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.main(Main.java:102)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.com.android.Foo main(java.lang.String[],</line>
+    <line>com.android.Bar)(Main.java:102)</line>
+  </retracedVerbose>
+</test>

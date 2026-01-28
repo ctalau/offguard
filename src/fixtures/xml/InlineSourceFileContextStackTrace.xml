@@ -1,0 +1,38 @@
+<test name="InlineSourceFileContextStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>  at com.google.appreduce.remapper.KotlinJavaSourceFileTestObject</line>
+    <line>.main(KotlinJavaSourceFileTestObject.java:1)</line>
+  </obfuscated>
+  <mapping>
+    <line>com.google.appreduce.remapper.KotlinJavaSourceFileTestLibrary -&gt;</line>
+    <line> com.google.appreduce.remapper.KotlinJavaSourceFileTestLibrary:</line>
+    <line># {\&quot;id\&quot;:\&quot;sourceFile\&quot;,\&quot;fileName\&quot;:\&quot;KotlinJavaSourceFileTestLibrary.kt\&quot;}</line>
+    <line>    void &lt;init&gt;() -&gt; &lt;init&gt;</line>
+    <line>com.google.appreduce.remapper.KotlinJavaSourceFileTestObject -&gt;</line>
+    <line> com.google.appreduce.remapper.KotlinJavaSourceFileTestObject:</line>
+    <line>    void &lt;init&gt;() -&gt; &lt;init&gt;</line>
+    <line>    1:1:void com.google.appreduce.remapper.KotlinJavaSourceFileTestLibrary</line>
+    <line>.throwsException():22:22 -&gt; main</line>
+    <line>    1:1:void com.google.appreduce.remapper.KotlinJavaSourceFileTestLibrary</line>
+    <line>.callsThrowsException():19 -&gt; main</line>
+    <line>    1:1:void main(java.lang.String[]):32 -&gt; main</line>
+    <line>    2:7:void printStackTraceUpToMain(java.lang.Exception):19:24 -&gt; main</line>
+    <line>    2:7:void main(java.lang.String[]):34 -&gt; main</line>
+  </mapping>
+  <retraced>
+    <line>  at com.google.appreduce.remapper.KotlinJavaSourceFileTestLibrary</line>
+    <line>.throwsException(KotlinJavaSourceFileTestLibrary.kt:22)</line>
+    <line>  at com.google.appreduce.remapper.KotlinJavaSourceFileTestLibrary</line>
+    <line>.callsThrowsException(KotlinJavaSourceFileTestLibrary.kt:19)</line>
+    <line>  at com.google.appreduce.remapper.KotlinJavaSourceFileTestObject</line>
+    <line>.main(KotlinJavaSourceFileTestObject.java:32)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>  at com.google.appreduce.remapper.KotlinJavaSourceFileTestLibrary</line>
+    <line>.void throwsException()(KotlinJavaSourceFileTestLibrary.kt:22)</line>
+    <line>  at com.google.appreduce.remapper.KotlinJavaSourceFileTestLibrary</line>
+    <line>.void callsThrowsException()(KotlinJavaSourceFileTestLibrary.kt:19)</line>
+    <line>  at com.google.appreduce.remapper.KotlinJavaSourceFileTestObject</line>
+    <line>.void main(java.lang.String[])(KotlinJavaSourceFileTestObject.java:32)</line>
+  </retracedVerbose>
+</test>

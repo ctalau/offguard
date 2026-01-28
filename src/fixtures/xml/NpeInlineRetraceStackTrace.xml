@@ -1,0 +1,19 @@
+<test name="NpeInlineRetraceStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat a.a(:4)</line>
+  </obfuscated>
+  <mapping>
+    <line># { id: &apos;com.android.tools.r8.mapping&apos;, version: &apos;2.0&apos; }</line>
+    <line>some.Class -&gt; a:</line>
+    <line>  4:4:void other.Class():23:23 -&gt; a</line>
+  </mapping>
+  <retraced>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat some.Class.caller(Class.java:7)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat some.Class.void caller(other.Class)(Class.java:7)</line>
+  </retracedVerbose>
+</test>

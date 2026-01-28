@@ -1,0 +1,18 @@
+<test name="TrailingWhitespaceStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat a.b.main(Main.dummy:1)</line>
+  </obfuscated>
+  <mapping>
+    <line>com.android.tools.r8.naming.retrace.Main -&gt; a.b:</line>
+    <line>    1:1:void main(java.lang.String[]):7:7 -&gt; main</line>
+  </mapping>
+  <retraced>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.main(Main.java:7)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void main(java.lang.String[])(Main.java:7)</line>
+  </retracedVerbose>
+</test>

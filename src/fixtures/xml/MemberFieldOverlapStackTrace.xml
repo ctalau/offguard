@@ -1,0 +1,19 @@
+<test name="MemberFieldOverlapStackTrace" expectedWarnings="1">
+  <obfuscated>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat a.A.a(Bar.java:1)</line>
+  </obfuscated>
+  <mapping>
+    <line>foo.Bar -&gt; a.A:</line>
+    <line>  1:1:int method():5 -&gt; a</line>
+    <line>  int field -&gt; a</line>
+  </mapping>
+  <retraced>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat foo.Bar.method(Bar.java:5)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>\tat foo.Bar.int method()(Bar.java:5)</line>
+  </retracedVerbose>
+</test>

@@ -1,0 +1,26 @@
+<test name="InvalidStackTrace" expectedWarnings="1">
+  <obfuscated>
+    <line>  hulubulu</line>
+    <line>  XXX, where are you</line>
+    <line>a.b.c: Problem when compiling program</line>
+    <line> . . . 7 more</line>
+    <line>  ... 7 more</line>
+  </obfuscated>
+  <mapping>
+    <line>foo.bar.baz -&gt; a.b.c:</line>
+  </mapping>
+  <retraced>
+    <line>  hulubulu</line>
+    <line>  XXX, where are you</line>
+    <line>foo.bar.baz: Problem when compiling program</line>
+    <line> . . . 7 more</line>
+    <line>  ... 7 more</line>
+  </retraced>
+  <retracedVerbose>
+    <line>  hulubulu</line>
+    <line>  XXX, where are you</line>
+    <line>foo.bar.baz: Problem when compiling program</line>
+    <line> . . . 7 more</line>
+    <line>  ... 7 more</line>
+  </retracedVerbose>
+</test>

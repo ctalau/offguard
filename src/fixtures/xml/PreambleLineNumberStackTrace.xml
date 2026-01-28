@@ -1,0 +1,28 @@
+<test name="PreambleLineNumberStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>  at kotlin.t.a(SourceFile)</line>
+    <line>  at kotlin.t.a(SourceFile:0)</line>
+    <line>  at kotlin.t.a(SourceFile:1)</line>
+    <line>  at kotlin.t.a(SourceFile:2)</line>
+  </obfuscated>
+  <mapping>
+    <line>kotlin.ResultKt -&gt; kotlin.t:</line>
+    <line>  1:1:void createFailure(java.lang.Throwable):122:122 -&gt; a</line>
+    <line>  2:2:void createFailure(java.lang.Throwable):124:124 -&gt; a</line>
+  </mapping>
+  <retraced>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>  at kotlin.ResultKt.createFailure(Result.kt)</line>
+    <line>  at kotlin.ResultKt.createFailure(Result.kt)</line>
+    <line>  at kotlin.ResultKt.createFailure(Result.kt:122)</line>
+    <line>  at kotlin.ResultKt.createFailure(Result.kt:124)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>  at kotlin.ResultKt.void createFailure(java.lang.Throwable)(Result.kt)</line>
+    <line>  at kotlin.ResultKt.void createFailure(java.lang.Throwable)(Result.kt)</line>
+    <line>  at kotlin.ResultKt.void createFailure(java.lang.Throwable)(Result.kt:122)</line>
+    <line>  at kotlin.ResultKt.void createFailure(java.lang.Throwable)(Result.kt:124)</line>
+  </retracedVerbose>
+</test>
