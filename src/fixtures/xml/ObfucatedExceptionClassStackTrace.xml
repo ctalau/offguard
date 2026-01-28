@@ -1,0 +1,38 @@
+<test name="ObfucatedExceptionClassStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>a.b.c: Problem when compiling program</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>Caused by: a.b.c: You have to write the program first</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>    ... 7 more</line>
+  </obfuscated>
+  <mapping>
+    <line>foo.bar.baz -&gt; a.b.c:</line>
+  </mapping>
+  <retraced>
+    <line>foo.bar.baz: Problem when compiling program</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>Caused by: foo.bar.baz: You have to write the program first</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>    ... 7 more</line>
+  </retraced>
+  <retracedVerbose>
+    <line>foo.bar.baz: Problem when compiling program</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>Caused by: foo.bar.baz: You have to write the program first</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>    ... 7 more</line>
+  </retracedVerbose>
+</test>

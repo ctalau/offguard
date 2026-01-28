@@ -1,0 +1,26 @@
+<test name="InlineSourceFileStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>  at b.c(Unknown Source:1)</line>
+  </obfuscated>
+  <mapping>
+    <line>foo.Bar -&gt; a:</line>
+    <line>,</line>
+    <line>\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;</line>
+    <line>foo.Baz -&gt; b:</line>
+    <line>,</line>
+    <line>\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;\&quot;</line>
+    <line>    1:1:void foo.Bar.method():22:22 -&gt; c</line>
+    <line>,</line>
+  </mapping>
+  <retraced>
+    <line>  at foo.Bar.method(SourceFile1.kt:22)</line>
+    <line>, </line>
+    <line></line>
+  </retraced>
+  <retracedVerbose>
+    <line>  at foo.Bar.void method()(SourceFile1.kt:22)</line>
+    <line>,
+        </line>
+    <line></line>
+  </retracedVerbose>
+</test>

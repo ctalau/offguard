@@ -1,0 +1,29 @@
+<test name="SourceFileNameSynthesizeStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>\tat mapping.a(AW779999992:21)</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat mappingKotlin.b(AW779999992:21)</line>
+  </obfuscated>
+  <mapping>
+    <line>android.support.v7.widget.ActionMenuView -&gt; mapping:</line>
+    <line>,</line>
+    <line>android.support.v7.widget.ActionMenuViewKt -&gt; mappingKotlin:</line>
+    <line>,</line>
+  </mapping>
+  <retraced>
+    <line>\tat android.support.v7.widget.ActionMenuView.invokeItem(ActionMenuView.java:624)</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat android.support.v7.widget.ActionMenuViewKt.invokeItem(ActionMenuView.kt:624)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>\tat android.support.v7.widget.ActionMenuView.void invokeItem()(ActionMenuView.java:624)</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat android.support.v7.widget.ActionMenuViewKt.void invokeItem()(ActionMenuView.kt:624)</line>
+  </retracedVerbose>
+</test>

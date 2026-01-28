@@ -1,0 +1,47 @@
+<test name="SyntheticLambdaMethodWithInliningStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>  at a.a.b(a.java:3)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>  at example.Main.main(Main.java:1)</line>
+  </obfuscated>
+  <mapping>
+    <line># {&apos;id&apos;:&apos;com.android.tools.r8.mapping&apos;,&apos;version&apos;:&apos;1.0&apos;}</line>
+    <line>,</line>
+    <line>  1:1:void main(java.lang.String[]):123 -&gt; main</line>
+    <line>,</line>
+    <line>  3:3:void runIt():218 -&gt; b</line>
+    <line>,</line>
+    <line>example.Foo$$ExternalSyntheticLambda0 -&gt; a.b:</line>
+    <line>,</line>
+    <line>  4:4:void run(example.Foo):0 -&gt; a</line>
+    <line>,</line>
+  </mapping>
+  <retraced>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>  at example.Foo.runIt(Foo.java:218)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>  at example.Main.main(Main.java:123)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>  at example.Foo.void runIt()(Foo.java:218)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>  at example.Main.void main(java.lang.String[])(Main.java:123)</line>
+  </retracedVerbose>
+</test>

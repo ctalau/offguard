@@ -1,0 +1,37 @@
+<test name="OutlineInOutlineStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>java.io.IOException: INVALID_SENDER</line>
+    <line>, </line>
+    <line>\t</line>
+    <line>\tat b.a(:6)</line>
+    <line>, </line>
+    <line>\t</line>
+  </obfuscated>
+  <mapping>
+    <line># { id: &apos;com.android.tools.r8.mapping&apos;, version: &apos;2.0&apos; }</line>
+    <line>,</line>
+    <line>  4:4:int outline():0:0 -&gt; a</line>
+    <line>,</line>
+    <line>outline2.Class -&gt; b:</line>
+    <line>,</line>
+    <line># { &apos;id&apos;:&apos;com.android.tools.r8.outlineCallsite&apos;, &apos;positions&apos;: { &apos;4&apos;: 43 } }</line>
+    <line>,</line>
+    <line># { &apos;id&apos;:&apos;com.android.tools.r8.outline&apos; }</line>
+    <line>,</line>
+    <line>  1:1:void foo.bar.Baz.qux():42:42 -&gt; a</line>
+    <line>,</line>
+    <line>  28:28:int outlineCaller(int):0:0 -&gt; a</line>
+    <line>,</line>
+  </mapping>
+  <retraced>
+    <line>java.io.IOException: INVALID_SENDER</line>
+    <line>, </line>
+    <line>\t</line>
+  </retraced>
+  <retracedVerbose>
+    <line>java.io.IOException: INVALID_SENDER</line>
+    <line>,
+        </line>
+    <line>\t</line>
+  </retracedVerbose>
+</test>

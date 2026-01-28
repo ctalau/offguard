@@ -1,0 +1,60 @@
+<test name="CircularReferenceStackTrace" expectedWarnings="5">
+  <obfuscated>
+    <line>        [CIRCULAR REFERENCE: A.A]</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>        [CIRCULAR REFERENCE: None.existing.class]</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>        [CIRCU:AA]</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>        [CIRCULAR REFERENCE: ]</line>
+    <line>,
+        </line>
+    <line></line>
+  </obfuscated>
+  <mapping>
+    <line>foo.bar.Baz -&gt; A.A:</line>
+    <line>, </line>
+  </mapping>
+  <retraced>
+    <line>        [CIRCULAR REFERENCE: foo.bar.Baz]</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>        [CIRCULAR REFERENCE: None.existing.class]</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>        [CIRCU:AA]</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>        [CIRCULAR REFERENCE: ]</line>
+    <line>,
+        </line>
+    <line></line>
+  </retraced>
+  <retracedVerbose>
+    <line>        [CIRCULAR REFERENCE: foo.bar.Baz]</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>        [CIRCULAR REFERENCE: None.existing.class]</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>        [CIRCU:AA]</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>        [CIRCULAR REFERENCE: ]</line>
+    <line>,
+        </line>
+    <line></line>
+  </retracedVerbose>
+</test>

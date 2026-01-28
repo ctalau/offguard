@@ -1,0 +1,24 @@
+<test name="MultipleOriginalLinesNoLineNumberStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>, </line>
+    <line>\t</line>
+  </obfuscated>
+  <mapping>
+    <line>com.android.tools.r8.naming.retrace.Main -&gt; a:</line>
+    <line>,</line>
+  </mapping>
+  <retraced>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>,
+        </line>
+    <line>\t</line>
+  </retraced>
+  <retracedVerbose>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\t&lt;OR&gt; at com.android.tools.r8.naming.retrace.Main.void method1(java.lang.String)(Main.java:43)</line>
+  </retracedVerbose>
+</test>

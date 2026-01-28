@@ -1,0 +1,27 @@
+<test name="MultipleMapVersionsWarningStackTrace" expectedWarnings="2">
+  <obfuscated>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>, </line>
+    <line>\t</line>
+  </obfuscated>
+  <mapping>
+    <line># { id: &apos;com.android.tools.r8.mapping&apos;, version: &apos;98.0&apos; }</line>
+    <line>,</line>
+    <line># { id: &apos;com.android.tools.r8.mapping&apos;, version: &apos;99.0&apos; }</line>
+    <line>,</line>
+    <line># { id: &apos;com.android.tools.r8.mapping&apos;, version: &apos;1.0&apos; }</line>
+    <line>,</line>
+  </mapping>
+  <retraced>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>,
+        </line>
+    <line>\t</line>
+  </retraced>
+  <retracedVerbose>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>,
+        </line>
+    <line>\t</line>
+  </retracedVerbose>
+</test>

@@ -1,0 +1,23 @@
+<test name="ExceptionMessageWithClassNameInMessage" expectedWarnings="0">
+  <obfuscated>
+    <line>10-26 19:26:24.749 10159 26250 26363 E Tycho.crl: Exception</line>
+    <line>,
+        </line>
+    <line></line>
+  </obfuscated>
+  <mapping>
+    <line>foo.bar.baz -&gt; net:</line>
+  </mapping>
+  <retraced>
+    <line>10-26 19:26:24.749 10159 26250 26363 E Tycho.crl: Exception</line>
+    <line>,
+        </line>
+    <line></line>
+  </retraced>
+  <retracedVerbose>
+    <line>10-26 19:26:24.749 10159 26250 26363 E Tycho.crl: Exception</line>
+    <line>,
+        </line>
+    <line></line>
+  </retracedVerbose>
+</test>

@@ -1,0 +1,66 @@
+<test name="UnknownSourceStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>com.android.tools.r8.CompilationException: foo[parens](Source:3)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>    at a.a.a(Unknown Source)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>Caused by: com.android.tools.r8.CompilationException: foo[parens](Source:3)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>    ... 42 more</line>
+  </obfuscated>
+  <mapping>
+    <line>com.android.tools.r8.R8 -&gt; a.a:</line>
+    <line>, </line>
+    <line>  void bar(int, int) -&gt; a</line>
+  </mapping>
+  <retraced>
+    <line>com.android.tools.r8.CompilationException: foo[parens](Source:3)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>    &lt;OR&gt; at com.android.tools.r8.R8.foo(R8.java)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>    &lt;OR&gt; at com.android.tools.r8.R8.foo(R8.java)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>Caused by: com.android.tools.r8.CompilationException: foo[parens](Source:3)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>    &lt;OR&gt; at com.android.tools.r8.R8.foo(R8.java)</line>
+    <line>,
+        </line>
+    <line></line>
+  </retraced>
+  <retracedVerbose>
+    <line>com.android.tools.r8.CompilationException: foo[parens](Source:3)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>    &lt;OR&gt; at com.android.tools.r8.R8.void foo(int)(R8.java)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>    &lt;OR&gt; at com.android.tools.r8.R8.void foo(int)(R8.java)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>Caused by: com.android.tools.r8.CompilationException: foo[parens](Source:3)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>    &lt;OR&gt; at com.android.tools.r8.R8.void foo(int)(R8.java)</line>
+    <line>,
+        </line>
+    <line></line>
+  </retracedVerbose>
+</test>

@@ -1,0 +1,32 @@
+<test name="SourceFileWithNumberAndEmptyStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>  at com.android.tools.r8.R8.a(R.java:34)</line>
+    <line>, </line>
+    <line></line>
+  </obfuscated>
+  <mapping>
+    <line>com.android.tools.r8.R8 -&gt; com.android.tools.r8.R8:</line>
+    <line>,</line>
+    <line>  34:34:void runForTesting(com.android.tools.r8.utils.AndroidApp,com.android.tools.r8.utils.InternalOptions):261 -&gt; a</line>
+  </mapping>
+  <retraced>
+    <line>  at com.android.tools.r8.utils.ExceptionUtils.withR8CompilationHandler(ExceptionUtils.java:59)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>  at com.android.tools.r8.utils.ExceptionUtils.withR8CompilationHandler(ExceptionUtils.java:59)</line>
+    <line>,
+        </line>
+    <line></line>
+  </retraced>
+  <retracedVerbose>
+    <line>  at com.android.tools.r8.utils.ExceptionUtils.void withR8CompilationHandler(com.android.tools.r8.utils.Reporter,com.android.tools.r8.utils.ExceptionUtils$CompileAction)(ExceptionUtils.java:59)</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>  at com.android.tools.r8.utils.ExceptionUtils.void withR8CompilationHandler(com.android.tools.r8.utils.Reporter,com.android.tools.r8.utils.ExceptionUtils$CompileAction)(ExceptionUtils.java:59)</line>
+    <line>,
+        </line>
+    <line></line>
+  </retracedVerbose>
+</test>

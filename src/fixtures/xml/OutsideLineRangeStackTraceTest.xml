@@ -1,0 +1,42 @@
+<test name="OutsideLineRangeStackTraceTest" expectedWarnings="0">
+  <obfuscated>
+    <line>java.io.IOException: INVALID_SENDER</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat a.a(Unknown Source)</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat b.a(Unknown Source)</line>
+  </obfuscated>
+  <mapping>
+    <line>some.other.Class -&gt; a:</line>
+    <line>,</line>
+    <line>some.Class -&gt; b:</line>
+    <line>,</line>
+    <line>  4:4:void method2():10:10 -&gt; a</line>
+  </mapping>
+  <retraced>
+    <line>java.io.IOException: INVALID_SENDER</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat some.other.Class.method1(Class.java:42)</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat some.Class.method2(Class.java)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>java.io.IOException: INVALID_SENDER</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat some.other.Class.void method1()(Class.java:42)</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat some.Class.void method2()(Class.java)</line>
+  </retracedVerbose>
+</test>

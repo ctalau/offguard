@@ -30,12 +30,26 @@ Port the ProGuard retrace tool from Java to TypeScript, with comprehensive test 
   - `third_party/r8mappings.tar.gz` (via Google Storage)
   - Note: Skipping for now as we have extensive test coverage from the stacktrace files
 
-### 1.3 Create Test Triples
-- [ ] Parse Java test files to extract:
+### 1.3 Create Test Triples ✅
+- [x] Parse Java test files to extract:
   - Obfuscated stack traces
   - Mapping files
   - Expected deobfuscated output
-- [ ] Create structured test fixtures in XML format (name, obfuscated stack, mapping, deobfuscated stack)
+- [x] Create structured test fixtures in XML format (name, obfuscated stack, mapping, deobfuscated stack)
+  - **Generated 66 XML test fixtures from R8 test cases** (all parseable files)
+  - Created parser script at `scripts/parse-java-tests.ts`
+  - Test fixtures stored in `src/fixtures/xml/`
+  - Parser handles all edge cases:
+    - Arrays.asList(), ImmutableList.of(), Collections.singletonList()
+    - Multi-line string concatenation with + operator
+    - StringUtils.lines() and StringUtils.joinLines()
+    - Methods that call fail() or return null
+    - Empty mappings and special test cases
+  - 6 files intentionally skipped:
+    - StackTraceForTest.java (interface)
+    - ActualBotStackTraceBase.java (abstract class)
+    - StackTraceRegularExpressionParserTests.java (test runner)
+    - 3 Actual*StackTrace.java files (require external R8 mapping files)
 
 ## 2 Bring the Proguard code 
 

@@ -1,0 +1,38 @@
+<test name="AmbiguousMultipleInlineStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>java.lang.IndexOutOfBoundsException</line>
+    <line>,
+        </line>
+    <line>\t</line>
+  </obfuscated>
+  <mapping>
+    <line>com.android.tools.r8.Internal -&gt; com.android.tools.r8.Internal:</line>
+    <line>,</line>
+    <line>  10:10:void foo(int):10 -&gt; zza</line>
+    <line>,</line>
+    <line>  10:10:void some.inlinee2(int, int):20:20 -&gt; zza</line>
+    <line>,</line>
+  </mapping>
+  <retraced>
+    <line>java.lang.IndexOutOfBoundsException</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\t&lt;OR&gt; at some.inlinee2(some.java:20)</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\t&lt;OR&gt; at com.android.tools.r8.Internal.foo(Internal.java:42)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>java.lang.IndexOutOfBoundsException</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\t&lt;OR&gt; at some.void inlinee2(int,int)(some.java:20)</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\t&lt;OR&gt; at com.android.tools.r8.Internal.void foo(int,int)(Internal.java:42)</line>
+  </retracedVerbose>
+</test>

@@ -1,0 +1,42 @@
+<test name="InlineNoLineNumberStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>,
+        </line>
+    <line>\t</line>
+  </obfuscated>
+  <mapping>
+    <line>com.android.tools.r8.naming.retrace.Main -&gt; com.android.tools.r8.naming.retrace.Main:</line>
+    <line>,</line>
+    <line>    1:1:void main(java.lang.String[]):0 -&gt; main</line>
+    <line>,</line>
+    <line>    2:2:void method1(java.lang.String):0 -&gt; main</line>
+    <line>,</line>
+    <line>    3:3:void method3(long):0:0 -&gt; main</line>
+    <line>,</line>
+    <line>    3:3:void method1(java.lang.String):0 -&gt; main</line>
+    <line>,</line>
+  </mapping>
+  <retraced>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.method2(Main.java)</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.main(Main.java)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void method2(int)(Main.java)</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void main(java.lang.String[])(Main.java)</line>
+  </retracedVerbose>
+</test>
