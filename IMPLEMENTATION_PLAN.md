@@ -14,14 +14,9 @@ Port the ProGuard retrace tool from Java to TypeScript, with comprehensive test 
   ```
   /src
     /core          # Core retrace logic
-    /parser        # Stack trace & mapping parsers
     /types         # TypeScript type definitions
-    /cli           # CLI interface
-  /tests
     /fixtures      # Test data (obfuscated stacks, mappings)
-    /unit          # Unit tests
-    /integration   # Integration tests
-  /docs            # Documentation
+    /tests          # Unit tests
   ```
 
 ### 1.2 Collect Test Samples from R8
@@ -50,10 +45,7 @@ Create kotlin tests based on the xml files with the official implememtation. If 
 
 From the same data
 
-## Phase 4: create the ts port
-
-## Phase 4: API Design
-
+## Phase 4: create the ts port of the kotlin code
 - idiomatic TS API
 
 
@@ -62,14 +54,12 @@ From the same data
 ### 5.1 Code Documentation
 - [ ] Add JSDoc comments to all public APIs
 - [ ] Document types and interfaces
-- [ ] Add inline comments for complex logic
 
 ### 5.2 User Documentation
 - [ ] Create comprehensive README.md:
   - Installation instructions
   - Quick start guide
   - API reference
-  - CLI usage
   - Examples
 
 
@@ -77,7 +67,7 @@ From the same data
 
 ### 6.1 Package.json Setup
 - [ ] Configure package metadata:
-  - Name: `offguard` (or `@y/offguard`)
+  - Name: `@ctalau/offguard`
   - Version: Start at 0.1.0
   - Description, keywords, license
   - Repository, bugs, homepage URLs
@@ -124,43 +114,28 @@ Create `.github/workflows/ci.yml`:
 
 ### 7.2 Release & Publish Workflow
 
-
+Another gh workflow on tag. 
 
 ## Success Criteria
 
 1. **Functionality**: Successfully deobfuscates ProGuard/R8 obfuscated stack traces
-2. **Testing**: 100+ passing tests with >90% coverage
+2. **Testing**: 100ish passing tests 
 4. **Usability**: Clean API interface
-5. **Documentation**: Comprehensive docs for users and contributors
+5. **Documentation**: Comprehensive docs for users
 6. **Distribution**: Published to npm registry via automated workflow
 7. **Quality**: Passes linting, type checking, and all tests in CI
 
 ## Technical Stack
 
 - **Language**: TypeScript
-- **Testing**: Jest or Vitest
-- **Build**: tsup or rollup
+- **Testing**: Vitest
+- **Build**: tsup
 - **Linting**: ESLint + Prettier
 - **CI/CD**: GitHub Actions
-- **Registry**: GitHub Package Registry
+- **Registry**: Npm
 - **Node**: Support 18+ (LTS versions)
-
-## Timeline Estimates
-
-- Phase 1: Test Data Collection - Foundation work
-- Phase 2: Core Implementation - Main development effort
-- Phase 3: Test Validation - Critical quality phase
-- Phase 4: CLI/API - Interface polish
-- Phase 5: Documentation - User experience
-- Phase 6: NPM Package - Distribution setup
-- Phase 7: GitHub Actions - Automation
-- Phase 8: Release - Final validation
 
 ## Notes
 
 - Use TDD throughout: Write tests first, then implement
-- Start with simplest cases, gradually add complexity
-- Keep commits atomic and well-documented
-- Regular testing against R8 test suite
 - Prioritize correctness over performance initially
-- Consider adding benchmarks for performance
