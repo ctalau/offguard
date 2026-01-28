@@ -1,32 +1,41 @@
 <test name="InlineInOutlineStackTrace" expectedWarnings="0">
   <obfuscated>
     <line>java.io.IOException: INVALID_SENDER</line>
-    <line>\tat a.a(:2)</line>
+    <line>, </line>
+    <line>\t</line>
     <line>\tat b.s(:27)</line>
   </obfuscated>
   <mapping>
     <line># { id: &apos;com.android.tools.r8.mapping&apos;, version: &apos;2.0&apos; }</line>
-    <line>outline.Class -&gt; a:</line>
+    <line>,</line>
     <line>  1:2:int some.inlinee():75:76 -&gt; a</line>
-    <line>  1:2:int outline():0 -&gt; a</line>
+    <line>,</line>
     <line># { &apos;id&apos;:&apos;com.android.tools.r8.outline&apos; }</line>
-    <line>some.Class -&gt; b:</line>
+    <line>,</line>
     <line>  1:1:void foo.bar.Baz.qux():42:42 -&gt; s</line>
-    <line>  5:5:int foo.bar.baz.outlineCaller(int):98:98 -&gt; s</line>
+    <line>,</line>
     <line>  5:5:int outlineCaller(int):24 -&gt; s</line>
-    <line>  27:27:int outlineCaller(int):0:0 -&gt; s</line>
+    <line>,</line>
     <line># { &apos;id&apos;:&apos;com.android.tools.r8.outlineCallsite&apos;, &apos;positions&apos;: { &apos;1&apos;: 4, &apos;2&apos;: 5 } }</line>
   </mapping>
   <retraced>
     <line>java.io.IOException: INVALID_SENDER</line>
-    <line>\tat some.inlinee(some.java:76)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat foo.bar.baz.outlineCaller(baz.java:98)</line>
-    <line>\tat some.Class.outlineCaller(Class.java:24)</line>
+    <line>,
+        </line>
+    <line>\t</line>
   </retraced>
   <retracedVerbose>
     <line>java.io.IOException: INVALID_SENDER</line>
-    <line>\tat some.int inlinee()(some.java:76)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat foo.bar.baz.int outlineCaller(int)(baz.java:98)</line>
-    <line>\tat some.Class.int outlineCaller(int)(Class.java:24)</line>
+    <line>,
+        </line>
+    <line>\t</line>
   </retracedVerbose>
 </test>

@@ -1,0 +1,17 @@
+<test name="OverloadedWithAndWithoutRangeStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>  at A.a(SourceFile:3)</line>
+  </obfuscated>
+  <mapping>
+    <line>some.Class -&gt; A:</line>
+    <line>,</line>
+    <line>  3:3:void sync():425:425 -&gt; a</line>
+    <line>,</line>
+  </mapping>
+  <retraced>
+    <line>  at some.Class.sync(Class.java:425)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>  at some.Class.void sync()(Class.java:425)</line>
+  </retracedVerbose>
+</test>

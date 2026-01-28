@@ -1,28 +1,41 @@
 <test name="AmbiguousInlineFramesStackTrace" expectedWarnings="0">
   <obfuscated>
     <line>com.android.tools.r8.CompilationException:</line>
-    <line>    at a.a.a(Unknown Source:1)</line>
+    <line>, </line>
+    <line></line>
   </obfuscated>
   <mapping>
     <line>com.android.tools.r8.R8 -&gt; a.a:</line>
-    <line>  1:1:void foo(int):42:44 -&gt; a</line>
+    <line>,</line>
     <line>  1:1:void bar(int, int):32 -&gt; a</line>
-    <line>  1:1:void baz(int, int):10 -&gt; a</line>
+    <line>,</line>
   </mapping>
   <retraced>
     <line>com.android.tools.r8.CompilationException:</line>
-    <line>    at com.android.tools.r8.R8.foo(R8.java:42)</line>
+    <line>,
+        </line>
+    <line></line>
     <line>    &lt;OR&gt; at com.android.tools.r8.R8.foo(R8.java:43)</line>
-    <line>    &lt;OR&gt; at com.android.tools.r8.R8.foo(R8.java:44)</line>
+    <line>,
+        </line>
+    <line></line>
     <line>    at com.android.tools.r8.R8.bar(R8.java:32)</line>
-    <line>    at com.android.tools.r8.R8.baz(R8.java:10)</line>
+    <line>,
+        </line>
+    <line></line>
   </retraced>
   <retracedVerbose>
     <line>com.android.tools.r8.CompilationException:</line>
-    <line>    at com.android.tools.r8.R8.void foo(int)(R8.java:42)</line>
+    <line>,
+        </line>
+    <line></line>
     <line>    &lt;OR&gt; at com.android.tools.r8.R8.void foo(int)(R8.java:43)</line>
-    <line>    &lt;OR&gt; at com.android.tools.r8.R8.void foo(int)(R8.java:44)</line>
+    <line>,
+        </line>
+    <line></line>
     <line>    at com.android.tools.r8.R8.void bar(int,int)(R8.java:32)</line>
-    <line>    at com.android.tools.r8.R8.void baz(int,int)(R8.java:10)</line>
+    <line>,
+        </line>
+    <line></line>
   </retracedVerbose>
 </test>

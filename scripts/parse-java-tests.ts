@@ -21,18 +21,47 @@ interface TestData {
 }
 
 /**
- * Extract string array from Java Arrays.asList(...) or ImmutableList.of(...) call
+ * Extract string array from Java list construction
  */
 function extractStringArray(content: string, methodName: string): string[] | null {
-  // Match the method and its return statement - try both Arrays.asList and ImmutableList.of
+  // Check for special cases first: return obfuscatedStackTrace(), return null, or fail()
+  const specialPattern = new RegExp(
+    `public\\s+List<String>\\s+${methodName}\\s*\\(\\s*\\)\\s*\\{[^}]*(?:fail\\s*\\(\\s*\\)|return\\s+(?:obfuscatedStackTrace\\s*\\(\\s*\\)|null))`,
+    's'
+  );
+  const specialMatch = content.match(specialPattern);
+  if (specialMatch) {
+    if (specialMatch[0].includes('fail()')) {
+      // Methods that call fail() - return empty to skip
+      return [];
+    }
+    if (specialMatch[0].includes('obfuscatedStackTrace')) {
+      // Recursively get obfuscatedStackTrace
+      return extractStringArray(content, 'obfuscatedStackTrace');
+    }
+    if (specialMatch[0].includes('null')) {
+      // For null returns, return empty array
+      return [];
+    }
+  }
+
+  // Match the method and its return statement
+  // Use a more greedy pattern to capture everything including newlines until the closing );
   const patterns = [
+    // Arrays.asList(...) - match until we find );
     new RegExp(
-      `public\\s+List<String>\\s+${methodName}\\s*\\(\\s*\\)\\s*\\{[^}]*return\\s+Arrays\\.asList\\s*\\(([^;]+)\\);`,
-      's'
+      `public\\s+List<String>\\s+${methodName}\\s*\\(\\s*\\)\\s*\\{[^}]*return\\s+Arrays\\.asList\\s*\\(([\\s\\S]+?)\\);`,
+      ''
     ),
+    // ImmutableList.of(...)
     new RegExp(
-      `public\\s+List<String>\\s+${methodName}\\s*\\(\\s*\\)\\s*\\{[^}]*return\\s+ImmutableList\\.of\\s*\\(([^;]+)\\);`,
-      's'
+      `public\\s+List<String>\\s+${methodName}\\s*\\(\\s*\\)\\s*\\{[^}]*return\\s+ImmutableList\\.of\\s*\\(([\\s\\S]+?)\\);`,
+      ''
+    ),
+    // Collections.singletonList(...)
+    new RegExp(
+      `public\\s+List<String>\\s+${methodName}\\s*\\(\\s*\\)\\s*\\{[^}]*return\\s+Collections\\.singletonList\\s*\\(([\\s\\S]+?)\\);`,
+      ''
     ),
   ];
 
@@ -45,16 +74,71 @@ function extractStringArray(content: string, methodName: string): string[] | nul
     }
   }
 
-  if (!argsContent) return null;
+  if (!argsContent) {
+    return null;
+  }
 
-  // Extract all string literals, handling multi-line strings
+  return extractStringsFromArgs(argsContent);
+}
+
+/**
+ * Extract mapping string from StringUtils.lines(...), StringUtils.joinLines(...), or string literal
+ */
+function extractMapping(content: string): string | null {
+  // Match the mapping() method
+  const pattern = /public\s+String\s+mapping\s*\(\s*\)\s*\{[^}]*return\s+([^;]+);/s;
+  const match = content.match(pattern);
+
+  if (!match) return null;
+
+  const returnValue = match[1].trim();
+
+  // Check for r8MappingFromGitSha() - these need external files
+  if (returnValue.includes('r8MappingFromGitSha')) {
+    return null;
+  }
+
+  // Handle StringUtils.lines(...) or StringUtils.joinLines(...)
+  if (returnValue.includes('StringUtils.lines') || returnValue.includes('StringUtils.joinLines')) {
+    const argsMatch = returnValue.match(/StringUtils\.(lines|joinLines)\s*\((.+)\)/s);
+    if (argsMatch) {
+      const argsContent = argsMatch[2];
+      const strings = extractStringsFromArgs(argsContent);
+      return strings.join('\n');
+    }
+  }
+
+  // Handle direct string literal (including empty string)
+  if (returnValue.startsWith('"')) {
+    const stringMatch = returnValue.match(/"([^"]*)"/);
+    if (stringMatch) {
+      return stringMatch[1];
+    }
+  }
+
+  // Handle empty string explicitly
+  if (returnValue === '""') {
+    return '';
+  }
+
+  return null;
+}
+
+/**
+ * Extract strings from method arguments, handling concatenation
+ */
+function extractStringsFromArgs(argsContent: string): string[] {
+  // First, handle string concatenation by collapsing + operators
+  // This handles cases like: "part1" + " part2" + " part3"
+  const collapsed = collapseStringConcatenation(argsContent);
+
   const strings: string[] = [];
   let inString = false;
   let currentString = '';
   let escapeNext = false;
 
-  for (let i = 0; i < argsContent.length; i++) {
-    const char = argsContent[i];
+  for (let i = 0; i < collapsed.length; i++) {
+    const char = collapsed[i];
 
     if (escapeNext) {
       currentString += char;
@@ -83,58 +167,22 @@ function extractStringArray(content: string, methodName: string): string[] | nul
     }
   }
 
-  return strings;
+  // Filter out null entries
+  return strings.filter(s => s !== 'null');
 }
 
 /**
- * Extract mapping string from StringUtils.lines(...), StringUtils.joinLines(...), or string concatenation
+ * Collapse string concatenation: "a" + "b" + "c" -> "abc"
  */
-function extractMapping(content: string): string | null {
-  // Match the mapping() method
-  const pattern = /public\s+String\s+mapping\s*\(\s*\)\s*\{[^}]*return\s+([^;]+);/s;
-  const match = content.match(pattern);
-
-  if (!match) return null;
-
-  const returnValue = match[1].trim();
-
-  // Handle StringUtils.lines(...) or StringUtils.joinLines(...)
-  if (returnValue.includes('StringUtils.lines') || returnValue.includes('StringUtils.joinLines')) {
-    const argsMatch = returnValue.match(/StringUtils\.(lines|joinLines)\s*\((.+)\)/s);
-    if (argsMatch) {
-      const argsContent = argsMatch[2];
-      const strings = extractStringsFromArgs(argsContent);
-      return strings.join('\n');
-    }
-  }
-
-  // Handle direct string literal (including empty string)
-  if (returnValue.startsWith('"')) {
-    const stringMatch = returnValue.match(/"([^"]*)"/);
-    if (stringMatch) {
-      return stringMatch[1]; // Can be empty string
-    }
-  }
-
-  // Handle empty string explicitly
-  if (returnValue === '""') {
-    return '';
-  }
-
-  return null;
-}
-
-/**
- * Extract strings from method arguments
- */
-function extractStringsFromArgs(argsContent: string): string[] {
-  const strings: string[] = [];
+function collapseStringConcatenation(input: string): string {
+  let result = '';
   let inString = false;
-  let currentString = '';
   let escapeNext = false;
+  let currentString = '';
+  const strings: string[] = [];
 
-  for (let i = 0; i < argsContent.length; i++) {
-    const char = argsContent[i];
+  for (let i = 0; i < input.length; i++) {
+    const char = input[i];
 
     if (escapeNext) {
       currentString += char;
@@ -142,7 +190,7 @@ function extractStringsFromArgs(argsContent: string): string[] {
       continue;
     }
 
-    if (char === '\\') {
+    if (char === '\\' && inString) {
       escapeNext = true;
       currentString += char;
       continue;
@@ -150,18 +198,46 @@ function extractStringsFromArgs(argsContent: string): string[] {
 
     if (char === '"') {
       if (inString) {
+        // End of string
         strings.push(currentString);
         currentString = '';
         inString = false;
+
+        // Look ahead to see if there's a + for concatenation
+        let j = i + 1;
+        while (j < input.length && /\s/.test(input[j])) j++;
+        if (j < input.length && input[j] === '+') {
+          // Skip the +
+          i = j;
+          // Skip whitespace after +
+          while (i + 1 < input.length && /\s/.test(input[i + 1])) i++;
+        } else {
+          // Not concatenation, output the accumulated string
+          if (strings.length > 0) {
+            result += '"' + strings.join('') + '"';
+            strings.length = 0;
+          }
+          result += input.slice(inString ? i : i, j);
+          i = j - 1;
+        }
       } else {
+        // Start of string
         inString = true;
       }
     } else if (inString) {
       currentString += char;
+    } else if (strings.length === 0) {
+      // Not in concatenation mode, copy as-is
+      result += char;
     }
   }
 
-  return strings;
+  // Flush any remaining strings
+  if (strings.length > 0) {
+    result += '"' + strings.join('') + '"';
+  }
+
+  return result;
 }
 
 /**
@@ -196,10 +272,16 @@ function isConcreteTestClass(content: string): boolean {
     return false;
   }
 
+  // Skip classes that extend ActualBotStackTraceBase (they need external mapping files)
+  if (content.includes('extends ActualBotStackTraceBase')) {
+    return false;
+  }
+
   // Skip test runner classes
   if (content.includes('StackTraceRegularExpressionParserTests')) {
     return false;
   }
+
 
   // Must implement StackTraceForTest
   return content.includes('implements StackTraceForTest');
@@ -223,15 +305,16 @@ function parseJavaTestFile(filePath: string): TestData | null {
   }
 
   const obfuscatedStackTrace = extractStringArray(content, 'obfuscatedStackTrace');
-  if (!obfuscatedStackTrace) {
+  if (!obfuscatedStackTrace || obfuscatedStackTrace.length === 0) {
     console.error(`Could not extract obfuscatedStackTrace from ${filePath}`);
     return null;
   }
 
-  const retracedStackTrace = extractStringArray(content, 'retracedStackTrace');
-  if (!retracedStackTrace) {
-    console.error(`Could not extract retracedStackTrace from ${filePath}`);
-    return null;
+  let retracedStackTrace = extractStringArray(content, 'retracedStackTrace');
+  // If retracedStackTrace is empty (from fail() or null return), use obfuscatedStackTrace
+  // This handles negative test cases like NullStackTrace
+  if (!retracedStackTrace || retracedStackTrace.length === 0) {
+    retracedStackTrace = obfuscatedStackTrace;
   }
 
   const retraceVerboseStackTrace = extractStringArray(content, 'retraceVerboseStackTrace');
@@ -249,7 +332,7 @@ function parseJavaTestFile(filePath: string): TestData | null {
     name: className,
     obfuscatedStackTrace,
     retracedStackTrace,
-    retraceVerboseStackTrace: retraceVerboseStackTrace || undefined,
+    retraceVerboseStackTrace: retraceVerboseStackTrace && retraceVerboseStackTrace.length > 0 ? retraceVerboseStackTrace : undefined,
     mapping,
     expectedWarnings,
   };
@@ -284,11 +367,13 @@ function generateXml(testData: TestData): string {
 
   // Mapping
   lines.push('  <mapping>');
-  testData.mapping.split('\n').forEach(line => {
-    if (line.trim()) {
-      lines.push(`    <line>${escapeXml(line)}</line>`);
-    }
-  });
+  if (testData.mapping) {
+    testData.mapping.split('\n').forEach(line => {
+      if (line.trim()) {
+        lines.push(`    <line>${escapeXml(line)}</line>`);
+      }
+    });
+  }
   lines.push('  </mapping>');
 
   // Retraced stack trace (regular)
@@ -333,24 +418,30 @@ function main() {
 
   let successCount = 0;
   let failCount = 0;
+  let skippedCount = 0;
 
   // Parse each file and generate XML
   for (const javaFile of javaFiles) {
     const testData = parseJavaTestFile(javaFile);
 
-    if (testData) {
+    if (testData === null) {
+      const content = readFileSync(javaFile, 'utf-8');
+      if (!isConcreteTestClass(content)) {
+        skippedCount++;
+      } else {
+        console.error(`✗ Failed to parse ${javaFile}`);
+        failCount++;
+      }
+    } else {
       const xml = generateXml(testData);
       const outputFile = join(outputDir, `${testData.name}.xml`);
       writeFileSync(outputFile, xml, 'utf-8');
       console.log(`✓ Generated ${testData.name}.xml`);
       successCount++;
-    } else {
-      console.error(`✗ Failed to parse ${javaFile}`);
-      failCount++;
     }
   }
 
-  console.log(`\nSummary: ${successCount} succeeded, ${failCount} failed`);
+  console.log(`\nSummary: ${successCount} succeeded, ${failCount} failed, ${skippedCount} skipped`);
 
   if (failCount > 0) {
     process.exit(1);

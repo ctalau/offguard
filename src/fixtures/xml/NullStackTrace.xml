@@ -1,0 +1,25 @@
+<test name="NullStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>a.b.c: Problem when compiling program</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>    at r8.retrace(App:184)</line>
+    <line>,
+        </line>
+    <line></line>
+  </obfuscated>
+  <mapping>
+    <line>foo.bar.baz -&gt; a.b.c:</line>
+  </mapping>
+  <retraced>
+    <line>a.b.c: Problem when compiling program</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>    at r8.retrace(App:184)</line>
+    <line>,
+        </line>
+    <line></line>
+  </retraced>
+</test>

@@ -1,25 +1,32 @@
 <test name="ClassWithDashStackTrace" expectedWarnings="0">
   <obfuscated>
     <line>java.lang.NullPointerException</line>
-    <line>\tat I$-CC.staticMethod(I.java:66)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat Main.main(Main.java:73)</line>
   </obfuscated>
   <mapping>
     <line># {\&quot;id\&quot;:\&quot;com.android.tools.r8.mapping\&quot;,\&quot;version\&quot;:\&quot;1.0\&quot;}</line>
-    <line>Unused -&gt; I$-CC:</line>
+    <line>,</line>
     <line># {\&quot;id\&quot;:\&quot;com.android.tools.r8.synthesized\&quot;}</line>
-    <line>    66:66:void I.staticMethod() -&gt; staticMethod</line>
+    <line>,</line>
     <line>    66:66:void staticMethod():0 -&gt; staticMethod</line>
-    <line>    # {\&quot;id\&quot;:\&quot;com.android.tools.r8.synthesized\&quot;}</line>
+    <line>,</line>
+    <line>\&quot;\&quot;\&quot;\&quot;</line>
   </mapping>
   <retraced>
     <line>java.lang.NullPointerException</line>
-    <line>\tat I.staticMethod(I.java:66)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat Main.main(Main.java:73)</line>
   </retraced>
   <retracedVerbose>
     <line>java.lang.NullPointerException</line>
-    <line>\tat I.void staticMethod()(I.java:66)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat Main.main(Main.java:73)</line>
   </retracedVerbose>
 </test>

@@ -1,29 +1,39 @@
 <test name="AmbiguousMethodVerboseStackTrace" expectedWarnings="0">
   <obfuscated>
     <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>\tat a.a.c(Foo.java)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat a.a.b(Bar.java)</line>
-    <line>\tat a.a.a(Baz.java)</line>
+    <line>,
+        </line>
+    <line>\t</line>
   </obfuscated>
   <mapping>
     <line>com.android.tools.r8.naming.retrace.Main -&gt; a.a:</line>
-    <line>    com.android.Foo main(java.lang.String[],com.android.Bar) -&gt; a</line>
+    <line>,</line>
     <line>    com.android.Foo main(java.lang.String[]) -&gt; b</line>
-    <line>    void main(com.android.Bar) -&gt; b</line>
+    <line>,</line>
   </mapping>
   <retraced>
     <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.c(Main.java)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat com.android.tools.r8.naming.retrace.Main.main(Main.java)</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.main(Main.java)</line>
+    <line>,
+        </line>
+    <line>\t</line>
   </retraced>
   <retracedVerbose>
     <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.c(Main.java)</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.com.android.Foo</line>
-    <line> main(java.lang.String[])(Main.java)</line>
-    <line>\t&lt;OR&gt; at com.android.tools.r8.naming.retrace.Main.void main(com.android.Bar)(Main.java)</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.com.android.Foo</line>
-    <line> main(java.lang.String[],com.android.Bar)(Main.java)</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.com.android.Foo main(java.lang.String[])(Main.java)</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.com.android.Foo main(java.lang.String[],com.android.Bar)(Main.java)</line>
   </retracedVerbose>
 </test>

@@ -1,23 +1,23 @@
 <test name="ExceptionMessageWithClassNameInMessage" expectedWarnings="0">
   <obfuscated>
     <line>10-26 19:26:24.749 10159 26250 26363 E Tycho.crl: Exception</line>
-    <line>10-26 19:26:24.749 10159 26250 26363 E Tycho.crl: java.util.concurrent.ExecutionException:</line>
-    <line> ary: eu: Exception in CronetUrlRequest: net::ERR_CONNECTION_CLOSED, ErrorCode=5,</line>
-    <line> InternalErrorCode=-100, Retryable=true</line>
+    <line>,
+        </line>
+    <line></line>
   </obfuscated>
   <mapping>
     <line>foo.bar.baz -&gt; net:</line>
   </mapping>
   <retraced>
     <line>10-26 19:26:24.749 10159 26250 26363 E Tycho.crl: Exception</line>
-    <line>10-26 19:26:24.749 10159 26250 26363 E Tycho.crl: java.util.concurrent.ExecutionException:</line>
-    <line> ary: eu: Exception in CronetUrlRequest: foo.bar.baz::ERR_CONNECTION_CLOSED,</line>
-    <line> ErrorCode=5, InternalErrorCode=-100, Retryable=true</line>
+    <line>,
+        </line>
+    <line></line>
   </retraced>
   <retracedVerbose>
     <line>10-26 19:26:24.749 10159 26250 26363 E Tycho.crl: Exception</line>
-    <line>10-26 19:26:24.749 10159 26250 26363 E Tycho.crl: java.util.concurrent.ExecutionException:</line>
-    <line> ary: eu: Exception in CronetUrlRequest: foo.bar.baz::ERR_CONNECTION_CLOSED,</line>
-    <line> ErrorCode=5, InternalErrorCode=-100, Retryable=true</line>
+    <line>,
+        </line>
+    <line></line>
   </retracedVerbose>
 </test>

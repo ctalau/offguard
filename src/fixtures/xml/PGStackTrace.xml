@@ -1,38 +1,27 @@
 <test name="PGStackTrace" expectedWarnings="0">
   <obfuscated>
-    <line>09-16 15:43:01.249 23316 23316 E AndroidRuntime: java.lang.NullPointerException: Attempt</line>
-    <line> to invoke virtual method &apos;boolean</line>
-    <line> com.google.android.foo(com.google.android.foo.Data$Key)&apos; on a null object</line>
-    <line> reference</line>
-    <line>09-16 15:43:01.249 23316 23316 E AndroidRuntime:        at</line>
-    <line> com.google.apps.sectionheader.SectionHeaderListController.onToolbarStateChanged(PG:586)</line>
-    <line>09-16 15:43:01.249 23316 23316 E AndroidRuntime:        at</line>
-    <line> com.google.apps.Controller.onToolbarStateChanged(PG:1087)</line>
+    <line>09-16 15:43:01.249 23316 23316 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke virtual method &apos;boolean com.google.android.foo(com.google.android.foo.Data$Key)&apos; on a null object reference</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>09-16 15:43:01.249 23316 23316 E AndroidRuntime:        at com.google.apps.Controller.onToolbarStateChanged(PG:1087)</line>
   </obfuscated>
   <mapping>
-    <line>com.google.apps.sectionheader.SectionHeaderListController </line>
-    <line>-&gt; com.google.apps.sectionheader.SectionHeaderListController:</line>
-    <line>com.google.apps.Controller </line>
-    <line>-&gt; com.google.apps.Controller:</line>
+    <line>com.google.apps.sectionheader.SectionHeaderListController -&gt; com.google.apps.sectionheader.SectionHeaderListController:</line>
+    <line>,</line>
   </mapping>
   <retraced>
-    <line>09-16 15:43:01.249 23316 23316 E AndroidRuntime: java.lang.NullPointerException: Attempt</line>
-    <line> to invoke virtual method &apos;boolean</line>
-    <line> com.google.android.foo(com.google.android.foo.Data$Key)&apos; on a null object</line>
-    <line> reference</line>
-    <line>09-16 15:43:01.249 23316 23316 E AndroidRuntime:        at</line>
-    <line> com.google.apps.sectionheader.SectionHeaderListController.onToolbarStateChanged(SectionHeaderListController.java:586)</line>
-    <line>09-16 15:43:01.249 23316 23316 E AndroidRuntime:        at</line>
-    <line> com.google.apps.Controller.onToolbarStateChanged(Controller.java:1087)</line>
+    <line>09-16 15:43:01.249 23316 23316 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke virtual method &apos;boolean com.google.android.foo(com.google.android.foo.Data$Key)&apos; on a null object reference</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>09-16 15:43:01.249 23316 23316 E AndroidRuntime:        at com.google.apps.Controller.onToolbarStateChanged(Controller.java:1087)</line>
   </retraced>
   <retracedVerbose>
-    <line>09-16 15:43:01.249 23316 23316 E AndroidRuntime: java.lang.NullPointerException: Attempt</line>
-    <line> to invoke virtual method &apos;boolean</line>
-    <line> com.google.android.foo(com.google.android.foo.Data$Key)&apos; on a null object</line>
-    <line> reference</line>
-    <line>09-16 15:43:01.249 23316 23316 E AndroidRuntime:        at</line>
-    <line> com.google.apps.sectionheader.SectionHeaderListController.onToolbarStateChanged(SectionHeaderListController.java:586)</line>
-    <line>09-16 15:43:01.249 23316 23316 E AndroidRuntime:        at</line>
-    <line> com.google.apps.Controller.onToolbarStateChanged(Controller.java:1087)</line>
+    <line>09-16 15:43:01.249 23316 23316 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke virtual method &apos;boolean com.google.android.foo(com.google.android.foo.Data$Key)&apos; on a null object reference</line>
+    <line>,
+        </line>
+    <line></line>
+    <line>09-16 15:43:01.249 23316 23316 E AndroidRuntime:        at com.google.apps.Controller.onToolbarStateChanged(Controller.java:1087)</line>
   </retracedVerbose>
 </test>

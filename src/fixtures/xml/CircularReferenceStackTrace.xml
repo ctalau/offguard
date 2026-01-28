@@ -1,36 +1,60 @@
 <test name="CircularReferenceStackTrace" expectedWarnings="5">
   <obfuscated>
     <line>        [CIRCULAR REFERENCE: A.A]</line>
-    <line> [CIRCULAR REFERENCE: A.B]</line>
+    <line>,
+        </line>
+    <line></line>
     <line>        [CIRCULAR REFERENCE: None.existing.class]</line>
-    <line>        [CIRCULAR REFERENCE: A.A] </line>
+    <line>,
+        </line>
+    <line></line>
     <line>        [CIRCU:AA]</line>
-    <line>        [CIRCULAR REFERENCE: A.A</line>
+    <line>,
+        </line>
+    <line></line>
     <line>        [CIRCULAR REFERENCE: ]</line>
-    <line>        [CIRCULAR REFERENCE: None existing class]</line>
+    <line>,
+        </line>
+    <line></line>
   </obfuscated>
   <mapping>
     <line>foo.bar.Baz -&gt; A.A:</line>
-    <line>foo.bar.Qux -&gt; A.B:</line>
+    <line>, </line>
   </mapping>
   <retraced>
     <line>        [CIRCULAR REFERENCE: foo.bar.Baz]</line>
-    <line> [CIRCULAR REFERENCE: foo.bar.Qux]</line>
+    <line>,
+        </line>
+    <line></line>
     <line>        [CIRCULAR REFERENCE: None.existing.class]</line>
-    <line>        [CIRCULAR REFERENCE: foo.bar.Baz] </line>
+    <line>,
+        </line>
+    <line></line>
     <line>        [CIRCU:AA]</line>
-    <line>        [CIRCULAR REFERENCE: foo.bar.Baz</line>
+    <line>,
+        </line>
+    <line></line>
     <line>        [CIRCULAR REFERENCE: ]</line>
-    <line>        [CIRCULAR REFERENCE: None existing class]</line>
+    <line>,
+        </line>
+    <line></line>
   </retraced>
   <retracedVerbose>
     <line>        [CIRCULAR REFERENCE: foo.bar.Baz]</line>
-    <line> [CIRCULAR REFERENCE: foo.bar.Qux]</line>
+    <line>,
+        </line>
+    <line></line>
     <line>        [CIRCULAR REFERENCE: None.existing.class]</line>
-    <line>        [CIRCULAR REFERENCE: foo.bar.Baz] </line>
+    <line>,
+        </line>
+    <line></line>
     <line>        [CIRCU:AA]</line>
-    <line>        [CIRCULAR REFERENCE: foo.bar.Baz</line>
+    <line>,
+        </line>
+    <line></line>
     <line>        [CIRCULAR REFERENCE: ]</line>
-    <line>        [CIRCULAR REFERENCE: None existing class]</line>
+    <line>,
+        </line>
+    <line></line>
   </retracedVerbose>
 </test>

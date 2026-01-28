@@ -1,38 +1,51 @@
 <test name="NoObfuscatedLineNumberWithOverrideTest" expectedWarnings="0">
   <obfuscated>
     <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.main(Unknown Source)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat com.android.tools.r8.naming.retrace.Main.overload(Unknown Source)</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.definedOverload(Unknown Source)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat com.android.tools.r8.naming.retrace.Main.mainPC(:3)</line>
   </obfuscated>
   <mapping>
     <line>com.android.tools.r8.naming.retrace.Main -&gt; com.android.tools.r8.naming.retrace.Main:</line>
-    <line>    void main(java.lang.String):3 -&gt; main</line>
+    <line>,</line>
     <line>    void definedOverload():7 -&gt; definedOverload</line>
-    <line>    void definedOverload(java.lang.String):11 -&gt; definedOverload</line>
+    <line>,</line>
     <line>    void overload1():7 -&gt; overload</line>
-    <line>    void overload2(java.lang.String):11 -&gt; overload</line>
+    <line>,</line>
     <line>    void mainPC(java.lang.String[]):42 -&gt; mainPC</line>
   </mapping>
   <retraced>
     <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.main(Main.java:3)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat com.android.tools.r8.naming.retrace.Main.overload1(Main.java)</line>
-    <line>\t&lt;OR&gt; at com.android.tools.r8.naming.retrace.Main.overload2(Main.java)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat com.android.tools.r8.naming.retrace.Main.definedOverload(Main.java)</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.mainPC(Main.java:42)</line>
+    <line>,
+        </line>
+    <line>\t</line>
   </retraced>
   <retracedVerbose>
     <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.void main(java.lang.String)(Main.java:3)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat com.android.tools.r8.naming.retrace.Main.void overload1()(Main.java:7)</line>
-    <line>\t&lt;OR&gt; at com.android.tools.r8.naming.retrace.Main.void</line>
-    <line> overload2(java.lang.String)(Main.java:11)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat com.android.tools.r8.naming.retrace.Main.void definedOverload()(Main.java:7)</line>
-    <line>\t&lt;OR&gt; at com.android.tools.r8.naming.retrace.Main.void</line>
-    <line> definedOverload(java.lang.String)(Main.java:11)</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.void</line>
-    <line> mainPC(java.lang.String[])(Main.java:42)</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void mainPC(java.lang.String[])(Main.java:42)</line>
   </retracedVerbose>
 </test>

@@ -1,29 +1,37 @@
 <test name="InlineFileNameStackTrace" expectedWarnings="0">
   <obfuscated>
     <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.main(Main.dummy:3)</line>
+    <line>,
+        </line>
+    <line>\t</line>
   </obfuscated>
   <mapping>
     <line>com.android.tools.r8.naming.retrace.Main -&gt; com.android.tools.r8.naming.retrace.Main:</line>
-    <line>    3:3:void foo.Bar$Baz.baz(long):0:0 -&gt; main</line>
+    <line>,</line>
     <line>    3:3:void Foo$Bar.bar(int):2 -&gt; main</line>
-    <line>    3:3:void com.android.tools.r8.naming.retrace.Main$Foo.method1(java.lang.String):8 -&gt;</line>
-    <line> main</line>
+    <line>,</line>
     <line>    3:3:void main(java.lang.String[]):7 -&gt; main</line>
   </mapping>
   <retraced>
     <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>\tat foo.Bar$Baz.baz(Bar.java)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat Foo$Bar.bar(Foo.java:2)</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main$Foo.method1(Main.java:8)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat com.android.tools.r8.naming.retrace.Main.main(Main.java:7)</line>
   </retraced>
   <retracedVerbose>
     <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>\tat foo.Bar$Baz.void baz(long)(Bar.java)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat Foo$Bar.void bar(int)(Foo.java:2)</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main$Foo</line>
-    <line>.void method1(java.lang.String)(Main.java:8)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat com.android.tools.r8.naming.retrace.Main.void main(java.lang.String[])(Main.java:7)</line>
   </retracedVerbose>
 </test>

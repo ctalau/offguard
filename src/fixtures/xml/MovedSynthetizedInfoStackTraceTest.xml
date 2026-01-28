@@ -1,29 +1,33 @@
 <test name="MovedSynthetizedInfoStackTraceTest" expectedWarnings="0">
   <obfuscated>
     <line>java.lang.RuntimeException: foobar</line>
-    <line>\tat foo.bar.inlinee$synthetic(BaseCommand.java:2)</line>
+    <line>, </line>
+    <line>\t</line>
   </obfuscated>
   <mapping>
     <line># { id: &apos;com.android.tools.r8.mapping&apos;, version: &apos;2.2&apos; }</line>
-    <line>com.android.tools.r8.BaseCommand$Builder -&gt; foo.bar:</line>
+    <line>,</line>
     <line>    1:1:void inlinee(java.util.Collection):0:0 -&gt; inlinee$synthetic</line>
-    <line>    1:1:void inlinee$synthetic(java.util.Collection):0:0 -&gt; inlinee$synthetic</line>
+    <line>,</line>
     <line>    2:2:void inlinee(java.util.Collection):206:206 -&gt; inlinee$synthetic</line>
-    <line>    2:2:void inlinee$synthetic(java.util.Collection):0:0 -&gt; inlinee$synthetic</line>
+    <line>,</line>
     <line>      # {\&quot;id\&quot;:\&quot;com.android.tools.r8.synthesized\&quot;}</line>
-    <line>    4:4:void inlinee(java.util.Collection):208:208 -&gt; inlinee$synthetic</line>
+    <line>,</line>
     <line>    4:4:void inlinee$synthetic(java.util.Collection):0 -&gt; inlinee$synthetic</line>
-    <line>    7:7:void error(origin.Origin,java.lang.Throwable):363:363 -&gt; inlinee$synthetic</line>
+    <line>,</line>
     <line>    7:7:void inlinee(java.util.Collection):210 -&gt; inlinee$synthetic</line>
-    <line>    7:7:void inlinee$synthetic(java.util.Collection):0:0 -&gt; inlinee$synthetic</line>
+    <line>,</line>
   </mapping>
   <retraced>
     <line>java.lang.RuntimeException: foobar</line>
-    <line>\tat com.android.tools.r8.BaseCommand$Builder.inlinee(BaseCommand.java:206)</line>
+    <line>,
+        </line>
+    <line>\t</line>
   </retraced>
   <retracedVerbose>
     <line>java.lang.RuntimeException: foobar</line>
-    <line>\tat com.android.tools.r8.BaseCommand$Builder.void</line>
-    <line> inlinee(java.util.Collection)(BaseCommand.java:206)</line>
+    <line>,
+        </line>
+    <line>\t</line>
   </retracedVerbose>
 </test>

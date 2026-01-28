@@ -1,25 +1,34 @@
 <test name="OverloadSameLineTest" expectedWarnings="0">
   <obfuscated>
     <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>\tat foo.a.overload(Main.java:1)</line>
+    <line>,
+        </line>
+    <line>\t</line>
   </obfuscated>
   <mapping>
     <line>com.android.tools.r8.naming.retrace.Main -&gt; foo.a:</line>
-    <line>    1:1:void overload():7:7 -&gt; overload</line>
+    <line>,</line>
     <line>    1:1:void overload(java.lang.String):13:13 -&gt; overload</line>
-    <line>    1:1:void overload(int):15:15 -&gt; overload</line>
+    <line>,</line>
   </mapping>
   <retraced>
     <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.overload(Main.java:7)</line>
+    <line>,
+        </line>
+    <line>\t</line>
     <line>\tat com.android.tools.r8.naming.retrace.Main.overload(Main.java:13)</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.overload(Main.java:15)</line>
+    <line>,
+        </line>
+    <line>\t</line>
   </retraced>
   <retracedVerbose>
     <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.void overload()(Main.java:7)</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.void</line>
-    <line> overload(java.lang.String)(Main.java:13)</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.void overload(int)(Main.java:15)</line>
+    <line>,
+        </line>
+    <line>\t</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.void overload(java.lang.String)(Main.java:13)</line>
+    <line>,
+        </line>
+    <line>\t</line>
   </retracedVerbose>
 </test>

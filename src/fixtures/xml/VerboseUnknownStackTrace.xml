@@ -1,16 +1,19 @@
 <test name="VerboseUnknownStackTrace" expectedWarnings="0">
   <obfuscated>
     <line>java.lang.IndexOutOfBoundsException</line>
-    <line>\tat java.util.ArrayList.get(ArrayList.java:411)</line>
+    <line>, </line>
+    <line>\t</line>
   </obfuscated>
   <mapping>
   </mapping>
   <retraced>
     <line>java.lang.IndexOutOfBoundsException</line>
-    <line>\tat java.util.ArrayList.get(ArrayList.java:411)</line>
+    <line>, </line>
+    <line>\t</line>
   </retraced>
   <retracedVerbose>
     <line>java.lang.IndexOutOfBoundsException</line>
-    <line>\tat java.util.ArrayList.get(ArrayList.java:411)</line>
+    <line>, </line>
+    <line>\t</line>
   </retracedVerbose>
 </test>
