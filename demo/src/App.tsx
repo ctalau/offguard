@@ -1,9 +1,14 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { retrace } from '@ctalau/offguard';
 import { fixtures } from './fixtures';
 import './styles.css';
 
-const defaultFixture = fixtures[0];
+const defaultFixture = fixtures[0] ?? {
+  id: '',
+  label: '',
+  stack: '',
+  mapping: '',
+};
 
 export const App = () => {
   const [selectedFixtureId, setSelectedFixtureId] = useState(defaultFixture.id);
@@ -12,18 +17,16 @@ export const App = () => {
   const [output, setOutput] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const selectedFixture = useMemo(
-    () => fixtures.find((fixture) => fixture.id === selectedFixtureId),
-    [selectedFixtureId],
-  );
+  const handleLoadFixture = (fixtureId: string) => {
+    const fixture = fixtures.find((item) => item.id === fixtureId);
 
-  const handleLoadFixture = () => {
-    if (!selectedFixture) {
+    if (!fixture) {
       return;
     }
 
-    setStackTrace(selectedFixture.stack);
-    setMapping(selectedFixture.mapping);
+    setSelectedFixtureId(fixtureId);
+    setStackTrace(fixture.stack);
+    setMapping(fixture.mapping);
     setOutput('');
     setErrorMessage('');
   };
@@ -61,10 +64,10 @@ export const App = () => {
         </div>
         <div className="controls">
           <label className="field">
-            <span>Fixture</span>
+            <span>Example fixture</span>
             <select
               value={selectedFixtureId}
-              onChange={(event) => setSelectedFixtureId(event.target.value)}
+              onChange={(event) => handleLoadFixture(event.target.value)}
             >
               {fixtures.map((fixture) => (
                 <option key={fixture.id} value={fixture.id}>
@@ -73,9 +76,6 @@ export const App = () => {
               ))}
             </select>
           </label>
-          <button type="button" className="button secondary" onClick={handleLoadFixture}>
-            Load fixture
-          </button>
         </div>
       </header>
 
