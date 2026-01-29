@@ -30,41 +30,74 @@ export function parseXmlFixture(xmlContent: string): TestFixture {
   const name = testMatch[1];
   const expectedWarnings = parseInt(testMatch[2], 10);
 
-  // Helper function to extract lines from a section
-  const extractLines = (sectionName: string): string => {
-    const sectionRegex = new RegExp(
-      `<${sectionName}>([\\s\\S]*?)</${sectionName}>`,
-      'm'
-    );
-    const sectionMatch = xmlContent.match(sectionRegex);
-    if (!sectionMatch) {
-      return '';
-    }
-
-    const sectionContent = sectionMatch[1];
-    const lineMatches = sectionContent.matchAll(/<line>(.*?)<\/line>/gs);
-    const lines: string[] = [];
-
-    for (const match of lineMatches) {
-      let line = match[1];
-      // Decode XML entities
-      line = line
-        .replace(/&quot;/g, '"')
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/&amp;/g, '&');
-      // Handle escaped characters
-      line = line.replace(/\\t/g, '\t').replace(/\\n/g, '\n');
-      lines.push(line);
-    }
-
-    return lines.join('\n');
+  const sections: Record<string, string[]> = {
+    obfuscated: [],
+    mapping: [],
+    retraced: [],
+    retracedVerbose: [],
   };
 
-  const obfuscated = extractLines('obfuscated');
-  const mapping = extractLines('mapping');
-  const retraced = extractLines('retraced');
-  const retracedVerbose = extractLines('retracedVerbose');
+  let currentTag: keyof typeof sections | null = null;
+
+  const decodeEntities = (line: string): string =>
+    line
+      .replace(/&quot;/g, '"')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '&');
+
+  for (const rawLine of xmlContent.split('\n')) {
+    const line = rawLine.trim();
+
+    if (line === '<obfuscated>') {
+      currentTag = 'obfuscated';
+      continue;
+    }
+
+    if (line === '<mapping>') {
+      currentTag = 'mapping';
+      continue;
+    }
+
+    if (line === '<retraced>') {
+      currentTag = 'retraced';
+      continue;
+    }
+
+    if (line === '<retracedVerbose>') {
+      currentTag = 'retracedVerbose';
+      continue;
+    }
+
+    if (
+      line === '</obfuscated>' ||
+      line === '</mapping>' ||
+      line === '</retraced>' ||
+      line === '</retracedVerbose>'
+    ) {
+      currentTag = null;
+      continue;
+    }
+
+    if (currentTag && line.startsWith('<line>') && line.endsWith('</line>')) {
+      const start = line.indexOf('<line>') + 6;
+      const end = line.lastIndexOf('</line>');
+      if (end > start) {
+        let text = decodeEntities(line.substring(start, end));
+
+        if (currentTag !== 'mapping') {
+          text = text.replace(/\\t/g, '\t').replace(/\\n/g, '\n');
+        }
+
+        sections[currentTag].push(text);
+      }
+    }
+  }
+
+  const obfuscated = sections.obfuscated.join('\n');
+  const mapping = sections.mapping.join('\n');
+  const retraced = sections.retraced.join('\n');
+  const retracedVerbose = sections.retracedVerbose.join('\n');
 
   return {
     name,
