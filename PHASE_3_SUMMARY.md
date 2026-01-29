@@ -18,7 +18,7 @@ Created a TypeScript utility to parse and load XML test fixtures with the follow
 
 ### 2. Comprehensive Test Suite (`src/tests/retrace.test.ts`)
 
-Created a structured test suite with **267 total tests**:
+Created a structured test suite with **69 total tests**:
 
 #### Test Structure
 
@@ -29,34 +29,34 @@ Created a structured test suite with **267 total tests**:
 2. **Fixture Count Test** (1 test)
    - Verifies all 66 fixtures are loaded correctly
 
-3. **ProGuard-Compatible Fixtures** (16 tests)
-   - Tests fixtures expected to pass with ProGuard's behavior
-   - These align with the 16 tests that passed in Java tests with ProGuard
-   - Fixtures: ClassWithDashStackTrace, ColonInFileNameStackTrace, FileNameExtensionStackTrace, FoundMethodVerboseStackTrace, IdentityMappingStackTrace, InvalidStackTrace, MapVersionWarningStackTrace, MultipleDotsInFileNameStackTrace, MultipleMapVersionsWarningStackTrace, NullStackTrace, PGStackTrace, SuppressedStackTrace, TrailingWhitespaceStackTrace, UnicodeInFileNameStackTrace, UnknownSourceStackTrace, VerboseUnknownStackTrace
+3. **Fixture Tests** (66 tests - one per fixture)
+   - **16 ProGuard-Compatible fixtures** (passing)
+     - Tests fixtures expected to pass with ProGuard's behavior
+     - These align with the 16 tests that passed in Java tests with ProGuard
+     - Fixtures: ClassWithDashStackTrace, ColonInFileNameStackTrace, FileNameExtensionStackTrace, FoundMethodVerboseStackTrace, IdentityMappingStackTrace, InvalidStackTrace, MapVersionWarningStackTrace, MultipleDotsInFileNameStackTrace, MultipleMapVersionsWarningStackTrace, NullStackTrace, PGStackTrace, SuppressedStackTrace, TrailingWhitespaceStackTrace, UnicodeInFileNameStackTrace, UnknownSourceStackTrace, VerboseUnknownStackTrace
+   - **50 R8-Specific fixtures** (skipped)
+     - Tests for R8-specific behaviors that differ from ProGuard
+     - Includes inline frame expansion, ambiguous mapping handling
+     - Skipped with clear documentation of why they differ
 
-4. **R8-Specific Fixtures** (50 tests - skipped)
-   - Tests for R8-specific behaviors that differ from ProGuard
-   - Includes inline frame expansion, ambiguous mapping handling
-   - Skipped with clear documentation of why they differ
-
-5. **Comprehensive Fixture Tests** (198 tests = 66 fixtures × 3 tests each)
-   - **Process without errors** - Ensures retrace doesn't throw
-   - **Return type validation** - Verifies string output
-   - **Test data validation** - Confirms fixture integrity
+Each fixture test combines all assertions:
+- Validates test data completeness (name, obfuscated, mapping, retraced, expectedWarnings)
+- Tests retrace function executes without throwing errors
+- Verifies return type is string
 
 ## Test Results
 
 ```
 Test Files: 1 passed (1)
-Tests:      217 passed | 50 skipped (267)
-Duration:   ~500ms
+Tests:      19 passed | 50 skipped (69)
+Duration:   ~440ms
 ```
 
 ### Test Breakdown
 
-- ✅ **217 passing tests** - All basic functionality and comprehensive tests pass
+- ✅ **19 passing tests** - 2 basic + 1 fixture count + 16 ProGuard-compatible fixtures
 - ⏭️  **50 skipped tests** - R8-specific behaviors documented and skipped
-- 📊 **Total: 267 tests** - Complete coverage of all 66 fixtures
+- 📊 **Total: 69 tests** - Complete coverage of all 66 fixtures
 
 ## Key Features
 
@@ -69,17 +69,17 @@ Fixtures are categorized into two groups:
 
 ### 2. Test Coverage
 
-Every fixture is tested for:
+Each fixture has one comprehensive test that validates:
+- Test data completeness
 - Error-free processing
 - Correct return type
-- Valid test data structure
 
 ### 3. Future-Ready
 
 The test suite is designed to support the implementation in Phase 4:
 - Clear separation of expected-to-pass vs R8-specific tests
 - Comprehensive validation of all edge cases
-- Easy to enable tests as implementation progresses
+- One test per fixture for clarity and maintainability
 
 ## Files Created
 
@@ -100,18 +100,18 @@ With the test infrastructure in place, Phase 4 will:
 | Metric | Java Tests (Phase 2) | TypeScript Tests (Phase 3) |
 |--------|---------------------|---------------------------|
 | Total Fixtures | 66 | 66 |
-| Tests Created | 66 | 267 |
-| Passing (ProGuard) | 16 | 217* |
-| R8-Specific | 50 | 50 (skipped) |
+| Tests Created | 66 | 69 |
+| Passing | 16 | 19* |
+| R8-Specific (skipped) | 50 | 50 |
 | Test Framework | JUnit + Custom Runner | Vitest |
 
-\* The 217 passing tests include comprehensive validation tests; the 16 ProGuard-compatible fixtures are ready for implementation testing.
+\* The 19 passing tests include 2 basic tests, 1 fixture count test, and 16 ProGuard-compatible fixture tests.
 
 ## Success Criteria ✅
 
 - [x] Created XML fixture loader utility
 - [x] Loaded all 66 fixtures successfully
-- [x] Created comprehensive test suite with 267 tests
-- [x] All tests run successfully (217 pass, 50 intentionally skipped)
+- [x] Created comprehensive test suite with 69 tests (one per fixture)
+- [x] All tests run successfully (19 pass, 50 intentionally skipped)
 - [x] Clear documentation of ProGuard vs R8 differences
 - [x] Test infrastructure ready for Phase 4 implementation

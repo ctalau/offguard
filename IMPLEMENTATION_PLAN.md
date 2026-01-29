@@ -85,14 +85,13 @@ From the same data
   - Handles XML entity decoding and escape sequences
   - Provides functions to load single or all fixtures
 - [x] Create comprehensive TypeScript test suite (`src/tests/retrace.test.ts`)
-  - **267 total tests** covering all 66 fixtures
-  - **217 passing tests** - basic functionality and comprehensive validation
+  - **69 total tests** - one test per fixture plus basic tests
+  - **19 passing tests** - 2 basic + 1 fixture count + 16 ProGuard-compatible fixtures
   - **50 skipped tests** - R8-specific behaviors documented
-  - Categorizes fixtures into ProGuard-compatible (16) and R8-specific (50)
-  - Each fixture tested for: error-free processing, correct return type, valid data
+  - Each fixture test validates: test data completeness, error-free processing, correct return type
 - [x] Verify test infrastructure works correctly
   - All tests run successfully with Vitest
-  - Test results: 217 passed, 50 skipped
+  - Test results: 19 passed, 50 skipped
 - [x] Document Phase 3 completion in `PHASE_3_SUMMARY.md`
 
 ## Phase 4: create the ts port of the kotlin code
