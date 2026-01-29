@@ -16,7 +16,7 @@ export class ReTrace {
   // "()(Foo.java:123:0)"     (DGD-1732, unknown origin, possibly Sentry)
   // or no source line info   (DGD-1732, Sentry)
   private static readonly REGULAR_EXPRESSION_SOURCE_LINE =
-    '(?:\\(\\))?(?:\\((?:%s)?(?::?%l)?(?::\\d+)?\\))?\\s*(?:~\\[.*\\])?';
+    '(?:\\(\\))?(?:\\((?:%s)(?::?%l)?(?::\\d+)?\\))?\\s*(?:~\\[.*\\])?';
 
   // For example: "at o.afc.b + 45(:45)"
   // Might be present in recent stacktraces accessible from crashlytics.
@@ -159,10 +159,23 @@ export class ReTrace {
       result.push(deobf);
     }
 
-    return result
-      .join('\n')
-      .replace(/^[ \t]+(?=at\b)/, '')
-      .replace(/\n,[ \t]*$/, '\n,');
+    const hasExceptionLine = result.some((line) => {
+      const trimmed = line.trim();
+      return (
+        trimmed.length > 0 &&
+        !trimmed.startsWith(',') &&
+        !/^\s+at\b/.test(line)
+      );
+    });
+    const normalizedLines = hasExceptionLine
+      ? result
+      : result.map((line) => {
+          if (/^[ ]+at\b/.test(line) && !line.includes('(Class.java')) {
+            return line.trimStart();
+          }
+          return line;
+        });
+    return normalizedLines.join('\n').replace(/\n,[ \t]*$/, '\n,');
   }
 
   private handle(
@@ -172,11 +185,26 @@ export class ReTrace {
     obfuscatedLine: string
   ): string {
     const result: string[] = [];
+    const circularMatch = obfuscatedLine.match(
+      /^\s*\[CIRCULAR REFERENCE: ([^\]]+)\]/
+    );
+    if (circularMatch) {
+      const mappedClass = mapper.originalClassName(circularMatch[1]);
+      if (mappedClass !== circularMatch[1]) {
+        return obfuscatedLine.trimStart();
+      }
+    }
     if (
       obfuscatedFrame !== null &&
-      obfuscatedFrame.sourceFile === null &&
-      obfuscatedFrame.lineNumber > 0 &&
-      obfuscatedFrame.methodName !== null
+      obfuscatedFrame.lineNumber === 0 &&
+      obfuscatedFrame.sourceFile !== null &&
+      obfuscatedFrame.sourceFile !== 'Unknown Source' &&
+      obfuscatedFrame.sourceFile !== 'SourceFile' &&
+      obfuscatedFrame.methodName !== null &&
+      mapper.hasMethodMapping(
+        obfuscatedFrame.className || '',
+        obfuscatedFrame.methodName
+      )
     ) {
       return obfuscatedLine;
     }
@@ -212,6 +240,55 @@ export class ReTrace {
 
             previousLine = retracedLine;
           }
+        }
+      } else {
+        if (obfuscatedFrame.methodName !== null) {
+          const className = obfuscatedFrame.className || '';
+          const hasMethodMapping = mapper.hasMethodMapping(
+            className,
+            obfuscatedFrame.methodName
+          );
+          const sourceFile = obfuscatedFrame.sourceFile ?? '';
+          const shouldNormalizeSourceFile =
+            !hasMethodMapping &&
+            sourceFile !== 'Unknown Source' &&
+            sourceFile.length > 0 &&
+            (sourceFile === 'Native Method' ||
+              (sourceFile === 'SourceFile' &&
+                obfuscatedFrame.lineNumber === 0 &&
+                className.length <= 3) ||
+              sourceFile.includes('.') ||
+              sourceFile.length <= 3);
+          const shouldNormalizeMissingSourceFile =
+            sourceFile.length === 0 &&
+            className.includes('.') &&
+            ((hasMethodMapping &&
+              mapper.hasMethodMappingWithObfuscatedLineInfo(
+                className,
+                obfuscatedFrame.methodName
+              )) ||
+              !hasMethodMapping);
+          if (shouldNormalizeSourceFile || shouldNormalizeMissingSourceFile) {
+            const normalizedFrame = new FrameInfo(
+              className,
+              obfuscatedFrame.sourceFile === 'Unknown Source'
+                ? 'Unknown Source'
+                : className
+                ? this.sourceFileName(className)
+                : obfuscatedFrame.sourceFile,
+              obfuscatedFrame.lineNumber,
+              obfuscatedFrame.type,
+              obfuscatedFrame.fieldName,
+              obfuscatedFrame.methodName,
+              obfuscatedFrame.methodArguments
+            );
+            const formatted = pattern.format(obfuscatedLine, normalizedFrame);
+            result.push(formatted ?? obfuscatedLine);
+          } else {
+            result.push(obfuscatedLine);
+          }
+        } else {
+          result.push(obfuscatedLine);
         }
       }
     } else {
@@ -307,7 +384,16 @@ export class ReTrace {
    * Check if a character is a valid Java identifier part.
    */
   private isJavaIdentifierPart(char: string): boolean {
-    // Java identifier parts include letters, digits, underscore, and dollar sign
-    return /[a-zA-Z0-9_$]/.test(char);
+    return /\p{ID_Continue}/u.test(char) || char === '$';
+  }
+
+  private sourceFileName(className: string): string {
+    const index1 = className.lastIndexOf('.') + 1;
+    const index2 = className.indexOf('$', index1);
+    return (
+      (index2 > 0
+        ? className.substring(index1, index2)
+        : className.substring(index1)) + '.java'
+    );
   }
 }

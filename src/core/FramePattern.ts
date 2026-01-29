@@ -147,7 +147,7 @@ export class FramePattern {
             break;
 
           case 's':
-            sourceFile = match;
+            sourceFile = match.length > 0 ? match : null;
             break;
 
           case 'l':

@@ -34,7 +34,9 @@ class MethodInfo {
     public readonly originalLastLineNumber: number,
     public readonly originalType: string,
     public readonly originalName: string,
-    public readonly originalArguments: string
+    public readonly originalArguments: string,
+    public readonly hasObfuscatedLineInfo: boolean,
+    public readonly hasOriginalLineInfo: boolean
   ) {}
 
   /**
@@ -46,12 +48,37 @@ class MethodInfo {
     originalType: string | null,
     originalArguments: string | null
   ): boolean {
+    if (obfuscatedLineNumber === 0) {
+      if (this.hasObfuscatedLineInfo || this.hasOriginalLineInfo) {
+        return false;
+      }
+    } else if (this.hasObfuscatedLineInfo || this.hasOriginalLineInfo) {
+      if (!this.hasObfuscatedLineInfo) {
+        return false;
+      }
+      if (!this.hasOriginalLineInfo) {
+        return false;
+      }
+      if (
+        this.obfuscatedFirstLineNumber === 0 &&
+        this.obfuscatedLastLineNumber === 0
+      ) {
+        return false;
+      }
+      if (
+        this.originalFirstLineNumber === 0 &&
+        this.originalLastLineNumber === 0
+      ) {
+        return false;
+      }
+      if (
+        obfuscatedLineNumber < this.obfuscatedFirstLineNumber ||
+        obfuscatedLineNumber > this.obfuscatedLastLineNumber
+      ) {
+        return false;
+      }
+    }
     return (
-      // We're allowing unknown values, represented as 0.
-      (obfuscatedLineNumber === 0 ||
-        this.obfuscatedLastLineNumber === 0 ||
-        (this.obfuscatedFirstLineNumber <= obfuscatedLineNumber &&
-          obfuscatedLineNumber <= this.obfuscatedLastLineNumber)) &&
       (originalType === null || originalType === this.originalType) &&
       (originalArguments === null ||
         originalArguments === this.originalArguments)
@@ -102,23 +129,20 @@ export class FrameRemapper implements MappingProcessor {
     );
 
     if (originalFrames.length === 0) {
-      const sourceFile = obfuscatedFrame.sourceFile;
-      // Create a transformed frame with the remapped class name.
-      originalFrames.push(
-        new FrameInfo(
-          originalClassName,
-          sourceFile === null
-            ? this.sourceFileName(originalClassName)
-            : sourceFile === 'Unknown Source'
-            ? 'Unknown Source'
-            : this.sourceFileName(originalClassName),
-          obfuscatedFrame.lineNumber,
-          obfuscatedFrame.type,
-          obfuscatedFrame.fieldName,
-          obfuscatedFrame.methodName,
-          obfuscatedFrame.methodArguments
-        )
-      );
+      if (obfuscatedFrame.methodName === null && obfuscatedFrame.fieldName === null) {
+        return [
+          new FrameInfo(
+            originalClassName,
+            obfuscatedFrame.sourceFile,
+            obfuscatedFrame.lineNumber,
+            obfuscatedFrame.type,
+            obfuscatedFrame.fieldName,
+            obfuscatedFrame.methodName,
+            obfuscatedFrame.methodArguments
+          ),
+        ];
+      }
+      return null;
     }
 
     return originalFrames;
@@ -154,9 +178,10 @@ export class FrameRemapper implements MappingProcessor {
               originalFieldFrames.push(
                 new FrameInfo(
                   fieldInfo.originalClassName,
-                  obfuscatedFrame.sourceFile === 'Unknown Source'
-                    ? 'Unknown Source'
-                    : this.sourceFileName(fieldInfo.originalClassName),
+                  this.resolveSourceFile(
+                    obfuscatedFrame,
+                    fieldInfo.originalClassName
+                  ),
                   obfuscatedFrame.lineNumber,
                   fieldInfo.originalType,
                   fieldInfo.originalName,
@@ -183,6 +208,9 @@ export class FrameRemapper implements MappingProcessor {
     originalClassName: string,
     originalMethodFrames: FrameInfo[]
   ): void {
+    const allowPreambleMatch =
+      obfuscatedFrame.lineNumber === 0 &&
+      obfuscatedFrame.sourceFile === 'SourceFile';
     // Class name -> obfuscated method names.
     const methodMap = this.classMethodMap.get(originalClassName);
     if (methodMap !== undefined) {
@@ -210,7 +238,11 @@ export class FrameRemapper implements MappingProcessor {
                 obfuscatedLineNumber,
                 originalType,
                 originalArguments
-              )
+              ) ||
+              (allowPreambleMatch &&
+                methodInfo.hasObfuscatedLineInfo &&
+                methodInfo.hasOriginalLineInfo &&
+                methodInfo.obfuscatedFirstLineNumber > 0)
             ) {
               // Do we have a different original first line number?
               // We're allowing unknown values, represented as 0.
@@ -236,9 +268,10 @@ export class FrameRemapper implements MappingProcessor {
               originalMethodFrames.push(
                 new FrameInfo(
                   methodInfo.originalClassName,
-                  obfuscatedFrame.sourceFile === 'Unknown Source'
-                    ? 'Unknown Source'
-                    : this.sourceFileName(methodInfo.originalClassName),
+                  this.resolveSourceFile(
+                    obfuscatedFrame,
+                    methodInfo.originalClassName
+                  ),
                   lineNumber,
                   methodInfo.originalType,
                   obfuscatedFrame.fieldName,
@@ -303,6 +336,37 @@ export class FrameRemapper implements MappingProcessor {
       : obfuscatedClassName;
   }
 
+  hasMethodMapping(
+    obfuscatedClassName: string,
+    obfuscatedMethodName: string
+  ): boolean {
+    const originalClassName = this.originalClassName(obfuscatedClassName);
+    const methodMap = this.classMethodMap.get(originalClassName);
+    return methodMap !== undefined && methodMap.has(obfuscatedMethodName);
+  }
+
+  hasMethodMappingWithObfuscatedLineInfo(
+    obfuscatedClassName: string,
+    obfuscatedMethodName: string
+  ): boolean {
+    const originalClassName = this.originalClassName(obfuscatedClassName);
+    const methodMap = this.classMethodMap.get(originalClassName);
+    const methodSet = methodMap?.get(obfuscatedMethodName);
+    if (!methodSet) {
+      return false;
+    }
+    for (const methodInfo of methodSet) {
+      if (
+        methodInfo.hasObfuscatedLineInfo &&
+        (methodInfo.obfuscatedFirstLineNumber !== 0 ||
+          methodInfo.obfuscatedLastLineNumber !== 0)
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /**
    * Returns the Java source file name that typically corresponds to the
    * given class name.
@@ -316,6 +380,16 @@ export class FrameRemapper implements MappingProcessor {
         ? className.substring(index1, index2)
         : className.substring(index1)) + '.java'
     );
+  }
+
+  private resolveSourceFile(
+    obfuscatedFrame: FrameInfo,
+    className: string
+  ): string | null {
+    if (obfuscatedFrame.sourceFile === 'Unknown Source') {
+      return 'Unknown Source';
+    }
+    return this.sourceFileName(className);
   }
 
   // Implementations for MappingProcessor.
@@ -362,7 +436,9 @@ export class FrameRemapper implements MappingProcessor {
     newClassName: string,
     newFirstLineNumber: number,
     newLastLineNumber: number,
-    newMethodName: string
+    newMethodName: string,
+    hasObfuscatedLineInfo: boolean,
+    hasOriginalLineInfo: boolean
   ): void {
     // Original class name -> obfuscated method names.
     let methodMap = this.classMethodMap.get(newClassName);
@@ -388,7 +464,9 @@ export class FrameRemapper implements MappingProcessor {
         lastLineNumber,
         methodReturnType,
         methodName,
-        methodArguments
+        methodArguments,
+        hasObfuscatedLineInfo,
+        hasOriginalLineInfo
       )
     );
   }
