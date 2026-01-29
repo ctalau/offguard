@@ -1,221 +1,126 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="RetraceAssertionErrorStackTrace" expectedWarnings="0">
   <obfuscated>
     <line>java.lang.AssertionError</line>
     <line>,
         </line>
-    <line></line>
+    <line />
     <line>        at com.android.tools.r8.retrace.f.a(:48)</line>
     <line>,
         </line>
-    <line></line>
+    <line />
     <line>        at com.android.tools.r8.retrace.Retrace.run(:5)</line>
     <line>,
         </line>
-    <line></line>
+    <line />
   </obfuscated>
   <mapping>
     <line>com.android.tools.r8.retrace.Retrace -&gt; com.android.tools.r8.retrace.Retrace:</line>
-    <line>,</line>
     <line>    1:5:void &lt;clinit&gt;():34:38 -&gt; &lt;clinit&gt;</line>
-    <line>,</line>
     <line>    1:7:com.android.tools.r8.retrace.RetraceCommand$ProguardMapProducer getMappingSupplier(java.lang.String,com.android.tools.r8.DiagnosticsHandler):86:92 -&gt; a</line>
-    <line>,</line>
     <line>    10:12:com.android.tools.r8.retrace.RetraceCommand$ProguardMapProducer getMappingSupplier(java.lang.String,com.android.tools.r8.DiagnosticsHandler):88:90 -&gt; a</line>
-    <line>,</line>
     <line>    14:14:void lambda$run$1(java.util.List):135:135 -&gt; a</line>
-    <line>,</line>
     <line>    1:1:void run(java.lang.String[]):126:126 -&gt; b</line>
-    <line>,</line>
     <line>    2:22:void run(java.lang.String[]):127 -&gt; b</line>
-    <line>,</line>
     <line>    23:23:com.android.tools.r8.retrace.RetraceCommand$Builder parseArguments(java.lang.String[],com.android.tools.r8.DiagnosticsHandler):63 -&gt; b</line>
-    <line>,</line>
     <line>    24:25:com.android.tools.r8.retrace.RetraceCommand$Builder parseArguments(java.lang.String[],com.android.tools.r8.DiagnosticsHandler):63:64 -&gt; b</line>
-    <line>,</line>
     <line>    26:27:java.util.List getStackTraceFromFile(java.lang.String,com.android.tools.r8.DiagnosticsHandler):100:101 -&gt; b</line>
-    <line>,</line>
     <line>    26:27:void run(java.lang.String[]):127 -&gt; b</line>
-    <line>,</line>
     <line>    28:30:void run(java.lang.String[]):127 -&gt; b</line>
-    <line>,</line>
     <line>    31:35:void run(java.lang.String[]):127 -&gt; b</line>
-    <line>,</line>
     <line>    36:39:com.android.tools.r8.retrace.RetraceCommand$Builder parseArguments(java.lang.String[],com.android.tools.r8.DiagnosticsHandler):79 -&gt; b</line>
-    <line>,</line>
     <line>    40:40:com.android.tools.r8.retrace.RetraceCommand$Builder parseArguments(java.lang.String[],com.android.tools.r8.DiagnosticsHandler):79:79 -&gt; b</line>
-    <line>,</line>
     <line>    41:47:void run(java.lang.String[]):130:136 -&gt; b</line>
-    <line>,</line>
     <line>    48:49:void run(java.lang.String[]):127 -&gt; b</line>
-    <line>,</line>
     <line>    2:10:void withMainProgramHandler(com.android.tools.r8.retrace.Retrace$MainAction):164:172 -&gt; main</line>
-    <line>,</line>
     <line>    11:11:void withMainProgramHandler(com.android.tools.r8.retrace.Retrace$MainAction):167:167 -&gt; main</line>
-    <line>,</line>
     <line>    1:9:void run(com.android.tools.r8.retrace.RetraceCommand):112:120 -&gt; run</line>
-    <line>,</line>
     <line>com.android.tools.r8.retrace.Retrace$1 -&gt; com.android.tools.r8.retrace.Retrace$a:</line>
-    <line>,</line>
     <line>com.android.tools.r8.retrace.Retrace$MainAction -&gt; com.android.tools.r8.retrace.Retrace$b:</line>
-    <line>,</line>
     <line>    1:1:void &lt;init&gt;():156:156 -&gt; &lt;init&gt;</line>
-    <line>,</line>
     <line>    com.android.tools.r8.DiagnosticsHandler diagnosticsHandler -&gt; a</line>
-    <line>,</line>
     <line>    com.android.tools.r8.retrace.RetraceCommand$ProguardMapProducer proguardMapProducer -&gt; b</line>
-    <line>,</line>
     <line>    boolean $assertionsDisabled -&gt; e</line>
-    <line>,</line>
     <line>    1:1:void &lt;init&gt;(boolean,com.android.tools.r8.DiagnosticsHandler,com.android.tools.r8.retrace.RetraceCommand$ProguardMapProducer,java.util.List,java.util.function.Consumer,com.android.tools.r8.retrace.RetraceCommand$1):13:13 -&gt; &lt;init&gt;</line>
-    <line>,</line>
     <line>    1:1:com.android.tools.r8.retrace.RetraceCommand$Builder builder(com.android.tools.r8.DiagnosticsHandler):45:45 -&gt; a</line>
-    <line>,</line>
     <line>com.android.tools.r8.retrace.RetraceCommand$Builder -&gt; com.android.tools.r8.retrace.RetraceCommand$a:</line>
-    <line>,</line>
     <line>    java.util.function.Consumer retracedStackTraceConsumer -&gt; d</line>
-    <line>,</line>
     <line>    java.util.List stackTrace -&gt; c</line>
-    <line>,</line>
     <line>    2:3:void &lt;init&gt;(com.android.tools.r8.DiagnosticsHandler):61:62 -&gt; &lt;init&gt;</line>
-    <line>,</line>
     <line>    2:2:com.android.tools.r8.retrace.RetraceCommand$Builder setStackTrace(java.util.List):88:88 -&gt; a</line>
-    <line>,</line>
     <line>    4:16:com.android.tools.r8.retrace.RetraceCommand build():103:115 -&gt; a</line>
-    <line>,</line>
     <line>    18:18:com.android.tools.r8.retrace.RetraceCommand build():110:110 -&gt; a</line>
-    <line>,</line>
     <line>    20:20:com.android.tools.r8.retrace.RetraceCommand build():104:104 -&gt; a</line>
-    <line>,</line>
     <line>    java.util.List stackTrace -&gt; b</line>
-    <line>,</line>
     <line>    com.android.tools.r8.DiagnosticsHandler diagnosticsHandler -&gt; c</line>
-    <line>,</line>
     <line>    1:3:com.android.tools.r8.retrace.RetraceCore$RetraceResult retrace():106:108 -&gt; a</line>
-    <line>,</line>
     <line>    8:8:com.android.tools.r8.retrace.RetraceCore$StackTraceLine parseLine(int,java.lang.String):503:503 -&gt; a</line>
-    <line>,</line>
     <line>    9:29:com.android.tools.r8.retrace.RetraceCore$ExceptionLine com.android.tools.r8.retrace.RetraceCore$ExceptionLine.tryParse(java.lang.String):191:211 -&gt; a</line>
-    <line>,</line>
     <line>    9:29:void retraceLine(java.util.List,int,java.util.List):115 -&gt; a</line>
-    <line>,</line>
     <line>    30:40:com.android.tools.r8.retrace.RetraceCore$StackTraceLine parseLine(int,java.lang.String):511 -&gt; a</line>
-    <line>,</line>
     <line>    41:42:com.android.tools.r8.retrace.RetraceCore$StackTraceLine parseLine(int,java.lang.String):513:514 -&gt; a</line>
-    <line>,</line>
     <line>    43:46:com.android.tools.r8.retrace.RetraceCore$StackTraceLine parseLine(int,java.lang.String):513:516 -&gt; a</line>
-    <line>,</line>
     <line>    47:50:void retraceLine(java.util.List,int,java.util.List):116:119 -&gt; a</line>
-    <line>,</line>
     <line>    51:52:void retraceLine(java.util.List,int,java.util.List):115 -&gt; a</line>
-    <line>,</line>
     <line>    int linePosition -&gt; f</line>
-    <line>,</line>
     <line>    java.lang.String startingWhitespace -&gt; a</line>
-    <line>,</line>
     <line>    java.lang.String at -&gt; b</line>
-    <line>,</line>
     <line>    java.lang.String method -&gt; d</line>
-    <line>,</line>
     <line>    1:7:void &lt;init&gt;(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int):261:267 -&gt; &lt;init&gt;</line>
-    <line>,</line>
     <line>    1:1:java.lang.String access$000(com.android.tools.r8.retrace.RetraceCore$AtLine):243:243 -&gt; a</line>
-    <line>,</line>
     <line>    8:22:java.util.List retrace(com.android.tools.r8.naming.ClassNameMapper):331:345 -&gt; a</line>
-    <line>,</line>
     <line>    58:67:java.util.List retrace(com.android.tools.r8.naming.ClassNameMapper):367:376 -&gt; a</line>
-    <line>,</line>
     <line>    75:75:java.util.List retrace(com.android.tools.r8.naming.ClassNameMapper):351:351 -&gt; a</line>
-    <line>,</line>
     <line>    1:1:java.lang.String access$100(com.android.tools.r8.retrace.RetraceCore$AtLine):243:243 -&gt; b</line>
-    <line>,</line>
     <line>    6:11:java.lang.String retracedFileName(java.lang.String):385:390 -&gt; b</line>
-    <line>,</line>
     <line>    12:14:java.lang.String retracedFileName(java.lang.String):390 -&gt; b</line>
-    <line>,</line>
     <line>    19:19:java.lang.Object com.android.tools.r8.com.google.common.base.Preconditions.checkNotNull(java.lang.Object):787:787 -&gt; b</line>
-    <line>,</line>
     <line>    19:19:java.lang.String retracedFileName(java.lang.String):390 -&gt; b</line>
-    <line>,</line>
     <line>    2:51:com.android.tools.r8.retrace.RetraceCore$AtLine tryParse(java.lang.String):272:321 -&gt; c</line>
-    <line>,</line>
     <line>    1:15:java.lang.String toString():410:424 -&gt; toString</line>
-    <line>,</line>
     <line>    1:1:void &lt;init&gt;():53:53 -&gt; &lt;init&gt;</line>
-    <line>,</line>
     <line>    2:16:int compare(com.android.tools.r8.retrace.RetraceCore$StackTraceLine,com.android.tools.r8.retrace.RetraceCore$StackTraceLine):57:71 -&gt; compare</line>
-    <line>,</line>
     <line>com.android.tools.r8.retrace.RetraceCore$ExceptionLine -&gt; com.android.tools.r8.retrace.d:</line>
-    <line>,</line>
     <line>    java.lang.String exceptionClass -&gt; c</line>
-    <line>,</line>
     <line>    java.lang.String message -&gt; d</line>
-    <line>,</line>
     <line>    1:6:java.util.List retrace(com.android.tools.r8.naming.ClassNameMapper):216:221 -&gt; a</line>
-    <line>,</line>
     <line>com.android.tools.r8.retrace.RetraceCore$MoreLine -&gt; com.android.tools.r8.retrace.e:</line>
-    <line>,</line>
     <line>    1:2:void &lt;init&gt;(java.lang.String):445:446 -&gt; &lt;init&gt;</line>
-    <line>,</line>
     <line>    1:1:java.lang.String toString():475:475 -&gt; toString</line>
-    <line>,</line>
     <line>    java.util.List nodes -&gt; a</line>
-    <line>,</line>
     <line>    1:3:java.util.List toListOfStrings():84:86 -&gt; a</line>
-    <line>,</line>
     <line>    1:1:void &lt;init&gt;():122:122 -&gt; &lt;init&gt;</line>
-    <line>,</line>
     <line>    java.util.List retrace(com.android.tools.r8.naming.ClassNameMapper) -&gt; a</line>
-    <line>,</line>
     <line>    2:2:int firstCharFromIndex(java.lang.String,int,char):130:130 -&gt; a</line>
-    <line>,</line>
     <line>    4:9:int firstFromIndex(java.lang.String,int,java.util.function.Predicate):134:139 -&gt; a</line>
-    <line>,</line>
     <line>    java.util.List lines -&gt; a</line>
-    <line>,</line>
     <line>    1:1:void &lt;clinit&gt;():24:24 -&gt; &lt;clinit&gt;</line>
-    <line>,</line>
     <line>    1:14:java.lang.String toString():36:49 -&gt; toString</line>
-    <line>,</line>
     <line>    java.lang.String line -&gt; a</line>
-    <line>,</line>
     <line>    1:1:java.util.List retrace(com.android.tools.r8.naming.ClassNameMapper):488:488 -&gt; a</line>
-    <line>,</line>
     <line>com.android.tools.r8.retrace.RetraceInvalidStackTraceLineDiagnostics -&gt; com.android.tools.r8.retrace.RetraceInvalidStackTraceLineDiagnostics:</line>
-    <line>,</line>
     <line>    int lineNumber -&gt; a</line>
-    <line>,</line>
     <line>    1:1:com.android.tools.r8.retrace.RetraceInvalidStackTraceLineDiagnostics createNull(int):44:44 -&gt; createNull</line>
-    <line>,</line>
     <line>    1:1:java.lang.String getDiagnosticMessage():40:40 -&gt; getDiagnosticMessage</line>
-    <line>,</line>
     <line>    1:1:com.android.tools.r8.position.Position getPosition():35:35 -&gt; getPosition</line>
   </mapping>
   <retraced>
     <line>java.lang.AssertionError</line>
-    <line>,
-        </line>
-    <line></line>
-    <line>        at com.android.tools.r8.retrace.RetraceCore.retraceLine(RetraceCore.java:117)</line>
-    <line>,
-        </line>
-    <line></line>
+    <line>        at com.android.tools.r8.retrace.f.a(f.java:48)</line>
     <line>        at com.android.tools.r8.retrace.Retrace.run(Retrace.java:116)</line>
-    <line>,
-        </line>
-    <line></line>
   </retraced>
   <retracedVerbose>
     <line>java.lang.AssertionError</line>
     <line>,
         </line>
-    <line></line>
+    <line />
     <line>        at com.android.tools.r8.retrace.RetraceCore.void retraceLine(java.util.List,int,java.util.List)(RetraceCore.java:117)</line>
     <line>,
         </line>
-    <line></line>
+    <line />
     <line>        at com.android.tools.r8.retrace.Retrace.void run(com.android.tools.r8.retrace.RetraceCommand)(Retrace.java:116)</line>
     <line>,
         </line>
-    <line></line>
+    <line />
   </retracedVerbose>
 </test>

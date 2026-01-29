@@ -1,6 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="SingleLineNoLineNumberStackTrace" expectedWarnings="0">
   <obfuscated>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>,
         </line>
     <line>\t</line>
@@ -12,34 +13,19 @@
   </obfuscated>
   <mapping>
     <line>com.android.tools.r8.naming.retrace.Main -&gt; foo.a:</line>
-    <line>,</line>
     <line>    0:0:void main(java.lang.String[]):28 -&gt; a</line>
-    <line>,</line>
     <line>    0:0:void main2(java.lang.String[]):29 -&gt; b</line>
-    <line>,</line>
     <line>    void main3(java.lang.String[]):30 -&gt; c</line>
-    <line>,</line>
   </mapping>
   <retraced>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>,
-        </line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>\t</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.main(Main.java:28)</line>
-    <line>,
-        </line>
+    <line>\tat foo.a.b(Unknown Source)</line>
     <line>\t</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.main2(Main.java)</line>
-    <line>,
-        </line>
-    <line>\t</line>
-    <line>\t&lt;OR&gt; at com.android.tools.r8.naming.retrace.Main.method3(Main.java)</line>
-    <line>,
-        </line>
-    <line>\t</line>
+    <line>\tat foo.a.d(Unknown Source)</line>
   </retraced>
   <retracedVerbose>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>,
         </line>
     <line>\t</line>

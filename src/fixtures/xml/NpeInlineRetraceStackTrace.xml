@@ -1,22 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="NpeInlineRetraceStackTrace" expectedWarnings="0">
   <obfuscated>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>, </line>
     <line>\t</line>
   </obfuscated>
   <mapping>
-    <line># { id: &apos;com.android.tools.r8.mapping&apos;, version: &apos;2.0&apos; }</line>
-    <line>,</line>
+    <line># { id: &amp;apos;com.android.tools.r8.mapping&amp;apos;, version: &amp;apos;2.0&amp;apos; }</line>
     <line>  4:4:void other.Class():23:23 -&gt; a</line>
   </mapping>
   <retraced>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>,
-        </line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
+    <line>, </line>
     <line>\t</line>
   </retraced>
   <retracedVerbose>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>,
         </line>
     <line>\t</line>

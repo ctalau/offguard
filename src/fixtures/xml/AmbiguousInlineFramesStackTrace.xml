@@ -1,41 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="AmbiguousInlineFramesStackTrace" expectedWarnings="0">
   <obfuscated>
     <line>com.android.tools.r8.CompilationException:</line>
     <line>, </line>
-    <line></line>
+    <line />
   </obfuscated>
   <mapping>
     <line>com.android.tools.r8.R8 -&gt; a.a:</line>
-    <line>,</line>
     <line>  1:1:void bar(int, int):32 -&gt; a</line>
-    <line>,</line>
   </mapping>
   <retraced>
     <line>com.android.tools.r8.CompilationException:</line>
-    <line>,
-        </line>
-    <line></line>
-    <line>    &lt;OR&gt; at com.android.tools.r8.R8.foo(R8.java:43)</line>
-    <line>,
-        </line>
-    <line></line>
-    <line>    at com.android.tools.r8.R8.bar(R8.java:32)</line>
-    <line>,
-        </line>
-    <line></line>
+    <line>,</line>
   </retraced>
   <retracedVerbose>
     <line>com.android.tools.r8.CompilationException:</line>
     <line>,
         </line>
-    <line></line>
+    <line />
     <line>    &lt;OR&gt; at com.android.tools.r8.R8.void foo(int)(R8.java:43)</line>
     <line>,
         </line>
-    <line></line>
+    <line />
     <line>    at com.android.tools.r8.R8.void bar(int,int)(R8.java:32)</line>
     <line>,
         </line>
-    <line></line>
+    <line />
   </retracedVerbose>
 </test>

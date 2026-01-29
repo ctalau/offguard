@@ -1,40 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="PreambleLineNumberStackTrace" expectedWarnings="0">
   <obfuscated>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>,
         </line>
-    <line></line>
+    <line />
     <line>  at kotlin.t.a(SourceFile:0)</line>
     <line>,
         </line>
-    <line></line>
+    <line />
     <line>  at kotlin.t.a(SourceFile:2)</line>
   </obfuscated>
   <mapping>
     <line>kotlin.ResultKt -&gt; kotlin.t:</line>
-    <line>,</line>
     <line>  2:2:void createFailure(java.lang.Throwable):124:124 -&gt; a</line>
   </mapping>
   <retraced>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>,
-        </line>
-    <line></line>
-    <line>  at kotlin.ResultKt.createFailure(Result.kt)</line>
-    <line>,
-        </line>
-    <line></line>
-    <line>  at kotlin.ResultKt.createFailure(Result.kt:124)</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
+    <line>  at kotlin.ResultKt.createFailure(ResultKt.java:124)</line>
+    <line>  at kotlin.ResultKt.createFailure(ResultKt.java:124)</line>
   </retraced>
   <retracedVerbose>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>,
         </line>
-    <line></line>
+    <line />
     <line>  at kotlin.ResultKt.void createFailure(java.lang.Throwable)(Result.kt)</line>
     <line>,
         </line>
-    <line></line>
+    <line />
     <line>  at kotlin.ResultKt.void createFailure(java.lang.Throwable)(Result.kt:124)</line>
   </retracedVerbose>
 </test>

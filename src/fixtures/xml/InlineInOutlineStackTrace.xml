@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="InlineInOutlineStackTrace" expectedWarnings="0">
   <obfuscated>
     <line>java.io.IOException: INVALID_SENDER</line>
@@ -6,27 +7,18 @@
     <line>\tat b.s(:27)</line>
   </obfuscated>
   <mapping>
-    <line># { id: &apos;com.android.tools.r8.mapping&apos;, version: &apos;2.0&apos; }</line>
-    <line>,</line>
+    <line># { id: &amp;apos;com.android.tools.r8.mapping&amp;apos;, version: &amp;apos;2.0&amp;apos; }</line>
     <line>  1:2:int some.inlinee():75:76 -&gt; a</line>
-    <line>,</line>
-    <line># { &apos;id&apos;:&apos;com.android.tools.r8.outline&apos; }</line>
-    <line>,</line>
+    <line># { &amp;apos;id&amp;apos;:&amp;apos;com.android.tools.r8.outline&amp;apos; }</line>
     <line>  1:1:void foo.bar.Baz.qux():42:42 -&gt; s</line>
-    <line>,</line>
     <line>  5:5:int outlineCaller(int):24 -&gt; s</line>
-    <line>,</line>
-    <line># { &apos;id&apos;:&apos;com.android.tools.r8.outlineCallsite&apos;, &apos;positions&apos;: { &apos;1&apos;: 4, &apos;2&apos;: 5 } }</line>
+    <line># { &amp;apos;id&amp;apos;:&amp;apos;com.android.tools.r8.outlineCallsite&amp;apos;, &amp;apos;positions&amp;apos;: { &amp;apos;1&amp;apos;: 4, &amp;apos;2&amp;apos;: 5 } }</line>
   </mapping>
   <retraced>
     <line>java.io.IOException: INVALID_SENDER</line>
-    <line>,
-        </line>
+    <line>, </line>
     <line>\t</line>
-    <line>\tat foo.bar.baz.outlineCaller(baz.java:98)</line>
-    <line>,
-        </line>
-    <line>\t</line>
+    <line>\tat b.s(:27)</line>
   </retraced>
   <retracedVerbose>
     <line>java.io.IOException: INVALID_SENDER</line>

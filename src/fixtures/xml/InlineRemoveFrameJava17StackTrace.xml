@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="InlineRemoveFrameJava17StackTrace" expectedWarnings="0">
   <obfuscated>
     <line>java.lang.NullPointerException</line>
@@ -6,19 +7,14 @@
     <line>\tat A.main(SourceFile:1)</line>
   </obfuscated>
   <mapping>
-    <line># {&apos;id&apos;:&apos;com.android.tools.r8.mapping&apos;,&apos;version&apos;:&apos;2.2&apos;}</line>
-    <line>,</line>
+    <line># {&amp;apos;id&amp;apos;:&amp;apos;com.android.tools.r8.mapping&amp;apos;,&amp;apos;version&amp;apos;:&amp;apos;2.2&amp;apos;}</line>
     <line>    1:5:void inlinable():90:90 -&gt; a</line>
   </mapping>
   <retraced>
     <line>java.lang.NullPointerException</line>
-    <line>,
-        </line>
+    <line>, </line>
     <line>\t</line>
-    <line>\tat foo.Class.outerCaller(Class.java:107)</line>
-    <line>,
-        </line>
-    <line>\t</line>
+    <line>\tat A.main(SourceFile:1)</line>
   </retraced>
   <retracedVerbose>
     <line>java.lang.NullPointerException</line>

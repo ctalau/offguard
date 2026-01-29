@@ -1,6 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="NoObfuscatedLineNumberWithOverrideTest" expectedWarnings="0">
   <obfuscated>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>,
         </line>
     <line>\t</line>
@@ -12,29 +13,19 @@
   </obfuscated>
   <mapping>
     <line>com.android.tools.r8.naming.retrace.Main -&gt; com.android.tools.r8.naming.retrace.Main:</line>
-    <line>,</line>
     <line>    void definedOverload():7 -&gt; definedOverload</line>
-    <line>,</line>
     <line>    void overload1():7 -&gt; overload</line>
-    <line>,</line>
     <line>    void mainPC(java.lang.String[]):42 -&gt; mainPC</line>
   </mapping>
   <retraced>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>,
-        </line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>\t</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.overload1(Main.java)</line>
-    <line>,
-        </line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.overload(Unknown Source)</line>
     <line>\t</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.definedOverload(Main.java)</line>
-    <line>,
-        </line>
-    <line>\t</line>
+    <line>\tat com.android.tools.r8.naming.retrace.Main.mainPC(:3)</line>
   </retraced>
   <retracedVerbose>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>,
         </line>
     <line>\t</line>

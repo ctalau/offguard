@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="AmbiguousWithMultipleLineMappingsStackTrace" expectedWarnings="0">
   <obfuscated>
     <line>java.lang.IndexOutOfBoundsException</line>
@@ -8,16 +9,12 @@
   </obfuscated>
   <mapping>
     <line>com.android.tools.r8.Internal -&gt; com.android.tools.r8.Internal:</line>
-    <line>,</line>
     <line>  11:11:void foo(int):11:11 -&gt; zza</line>
-    <line>,</line>
   </mapping>
   <retraced>
     <line>java.lang.IndexOutOfBoundsException</line>
-    <line>,
-        </line>
     <line>\t</line>
-    <line>\tat com.android.tools.r8.Internal.foo(Internal.java)</line>
+    <line>\tat com.android.tools.r8.Internal.zza(Unknown)</line>
   </retraced>
   <retracedVerbose>
     <line>java.lang.IndexOutOfBoundsException</line>

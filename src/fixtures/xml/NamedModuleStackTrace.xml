@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="NamedModuleStackTrace" expectedWarnings="0">
   <obfuscated>
     <line>SomeFakeException: this is a fake exception</line>
@@ -15,25 +16,16 @@
   </obfuscated>
   <mapping>
     <line>com.android.tools.r8.Classloader -&gt; classloader.a.b.a:</line>
-    <line>,</line>
     <line>  101:101:void main(java.lang.String[]):1:1 -&gt; a</line>
-    <line>,</line>
     <line>  80:80:void bar(java.lang.String[]):3:3 -&gt; c</line>
-    <line>,</line>
     <line>  9:9:void qux(java.lang.String[]):5:5 -&gt; e</line>
   </mapping>
   <retraced>
     <line>SomeFakeException: this is a fake exception</line>
-    <line>,
-        </line>
     <line>\t</line>
-    <line>\tat classloader.a.b.a//com.android.tools.r8.Main.foo(Main.java:2)</line>
-    <line>,
-        </line>
+    <line>\tat classloader.a.b.a//a.b(App.java:12)</line>
     <line>\t</line>
-    <line>\tat named_module/com.android.tools.r8.Main.baz(Main.java:4)</line>
-    <line>,
-        </line>
+    <line>\tat named_module/a.d(Lib.java:81)</line>
     <line>\t</line>
   </retraced>
   <retracedVerbose>

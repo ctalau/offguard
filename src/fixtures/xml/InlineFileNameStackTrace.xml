@@ -1,30 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="InlineFileNameStackTrace" expectedWarnings="0">
   <obfuscated>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>,
         </line>
     <line>\t</line>
   </obfuscated>
   <mapping>
     <line>com.android.tools.r8.naming.retrace.Main -&gt; com.android.tools.r8.naming.retrace.Main:</line>
-    <line>,</line>
     <line>    3:3:void Foo$Bar.bar(int):2 -&gt; main</line>
-    <line>,</line>
     <line>    3:3:void main(java.lang.String[]):7 -&gt; main</line>
   </mapping>
   <retraced>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>,
-        </line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>\t</line>
-    <line>\tat Foo$Bar.bar(Foo.java:2)</line>
-    <line>,
-        </line>
-    <line>\t</line>
-    <line>\tat com.android.tools.r8.naming.retrace.Main.main(Main.java:7)</line>
   </retraced>
   <retracedVerbose>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>,
         </line>
     <line>\t</line>

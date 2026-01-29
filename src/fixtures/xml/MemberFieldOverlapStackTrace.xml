@@ -1,22 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="MemberFieldOverlapStackTrace" expectedWarnings="1">
   <obfuscated>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>, </line>
     <line>\t</line>
   </obfuscated>
   <mapping>
     <line>foo.Bar -&gt; a.A:</line>
-    <line>, </line>
     <line>  int field -&gt; a</line>
   </mapping>
   <retraced>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>,
-        </line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
+    <line>, </line>
     <line>\t</line>
   </retraced>
   <retracedVerbose>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>,
         </line>
     <line>\t</line>
