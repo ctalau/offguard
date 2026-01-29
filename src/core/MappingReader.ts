@@ -39,10 +39,7 @@ export class MappingReader {
    * results with the given mapping processor. Returns the old class name,
    * or null if any subsequent class member lines can be ignored.
    */
-  private processClassMapping(
-    line: string,
-    mappingProcessor: MappingProcessor
-  ): string | null {
+  private processClassMapping(line: string, mappingProcessor: MappingProcessor): string | null {
     // See if we can parse "___ -> ___:", containing the original
     // class name and the new class name.
 
@@ -61,10 +58,7 @@ export class MappingReader {
     const newClassName = line.substring(arrowIndex + 2, colonIndex).trim();
 
     // Process this class name mapping.
-    const interested = mappingProcessor.processClassMapping(
-      className,
-      newClassName
-    );
+    const interested = mappingProcessor.processClassMapping(className, newClassName);
 
     return interested ? className : null;
   }
@@ -89,25 +83,21 @@ export class MappingReader {
     // name may contain an original class name "___.___".
 
     const colonIndex1 = line.indexOf(':');
-    const colonIndex2 =
-      colonIndex1 < 0 ? -1 : line.indexOf(':', colonIndex1 + 1);
+    const colonIndex2 = colonIndex1 < 0 ? -1 : line.indexOf(':', colonIndex1 + 1);
     const spaceIndex = line.indexOf(' ', colonIndex2 + 2);
     const argumentIndex1 = line.indexOf('(', spaceIndex + 1);
-    const argumentIndex2 =
-      argumentIndex1 < 0 ? -1 : line.indexOf(')', argumentIndex1 + 1);
-    const colonIndex3 =
-      argumentIndex2 < 0 ? -1 : line.indexOf(':', argumentIndex2 + 1);
-    const colonIndex4 =
-      colonIndex3 < 0 ? -1 : line.indexOf(':', colonIndex3 + 1);
+    const argumentIndex2 = argumentIndex1 < 0 ? -1 : line.indexOf(')', argumentIndex1 + 1);
+    const colonIndex3 = argumentIndex2 < 0 ? -1 : line.indexOf(':', argumentIndex2 + 1);
+    const colonIndex4 = colonIndex3 < 0 ? -1 : line.indexOf(':', colonIndex3 + 1);
     const arrowIndex = line.indexOf(
       '->',
       (colonIndex4 >= 0
         ? colonIndex4
         : colonIndex3 >= 0
-        ? colonIndex3
-        : argumentIndex2 >= 0
-        ? argumentIndex2
-        : spaceIndex) + 1
+          ? colonIndex3
+          : argumentIndex2 >= 0
+            ? argumentIndex2
+            : spaceIndex) + 1
     );
 
     if (spaceIndex < 0 || arrowIndex < 0) {
@@ -188,13 +178,7 @@ export class MappingReader {
   ): void {
     // Is it a field or a method?
     if (argumentIndex2 < 0) {
-      mappingProcessor.processFieldMapping(
-        className,
-        type,
-        name,
-        newClassName,
-        newName
-      );
+      mappingProcessor.processFieldMapping(className, type, name, newClassName, newName);
     } else {
       let firstLineNumber = 0;
       let lastLineNumber = 0;
@@ -204,10 +188,7 @@ export class MappingReader {
       const hasOriginalLineInfo = colonIndex3 >= 0;
 
       if (colonIndex2 >= 0) {
-        firstLineNumber = newFirstLineNumber = parseInt(
-          line.substring(0, colonIndex1).trim(),
-          10
-        );
+        firstLineNumber = newFirstLineNumber = parseInt(line.substring(0, colonIndex1).trim(), 10);
         lastLineNumber = newLastLineNumber = parseInt(
           line.substring(colonIndex1 + 1, colonIndex2).trim(),
           10
@@ -220,9 +201,7 @@ export class MappingReader {
 
       if (colonIndex3 >= 0) {
         firstLineNumber = parseInt(
-          line
-            .substring(colonIndex3 + 1, colonIndex4 > 0 ? colonIndex4 : arrowIndex)
-            .trim(),
+          line.substring(colonIndex3 + 1, colonIndex4 > 0 ? colonIndex4 : arrowIndex).trim(),
           10
         );
         lastLineNumber =

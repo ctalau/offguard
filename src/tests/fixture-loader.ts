@@ -20,9 +20,7 @@ export interface TestFixture {
  */
 export function parseXmlFixture(xmlContent: string): TestFixture {
   // Extract the test name and expectedWarnings from the <test> tag
-  const testMatch = xmlContent.match(
-    /<test\s+name="([^"]+)"\s+expectedWarnings="(\d+)"/
-  );
+  const testMatch = xmlContent.match(/<test\s+name="([^"]+)"\s+expectedWarnings="(\d+)"/);
   if (!testMatch) {
     throw new Error('Invalid XML: missing test element with name and expectedWarnings');
   }
