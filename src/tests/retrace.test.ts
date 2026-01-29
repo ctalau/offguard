@@ -17,8 +17,8 @@ describe('retrace', () => {
   describe('fixture tests', () => {
     const fixtures = loadAllFixtures();
 
-    it('should have loaded all 66 fixtures', () => {
-      expect(fixtures.length).toBe(66);
+    it('should have loaded all 67 fixtures', () => {
+      expect(fixtures.length).toBe(67);
     });
 
     fixtures.forEach((fixture) => {

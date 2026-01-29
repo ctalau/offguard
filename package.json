@@ -1,6 +1,6 @@
 {
   "name": "@ctalau/offguard",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeScript port of the ProGuard retrace tool for deobfuscating stack traces",
   "type": "module",
   "main": "./dist/index.cjs",

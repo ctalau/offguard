@@ -110,8 +110,23 @@ export class FrameRemapper implements MappingProcessor {
     this.transformMethodInfo(obfuscatedFrame, originalClassName, originalFrames);
 
     if (originalFrames.length === 0) {
-      if (obfuscatedFrame.methodName === null && obfuscatedFrame.fieldName === null) {
-        return [
+      if (
+        obfuscatedFrame.sourceFile === 'Unknown Source' &&
+        obfuscatedFrame.lineNumber > 0
+      ) {
+        originalFrames.push(
+          new FrameInfo(
+            originalClassName,
+            'Unknown Source',
+            obfuscatedFrame.lineNumber,
+            obfuscatedFrame.type,
+            obfuscatedFrame.fieldName,
+            obfuscatedFrame.methodName,
+            obfuscatedFrame.methodArguments
+          )
+        );
+      } else if (obfuscatedFrame.methodName === null && obfuscatedFrame.fieldName === null) {
+        originalFrames.push(
           new FrameInfo(
             originalClassName,
             obfuscatedFrame.sourceFile,
@@ -120,10 +135,11 @@ export class FrameRemapper implements MappingProcessor {
             obfuscatedFrame.fieldName,
             obfuscatedFrame.methodName,
             obfuscatedFrame.methodArguments
-          ),
-        ];
+          )
+        );
+      } else {
+        return null;
       }
-      return null;
     }
 
     return originalFrames;

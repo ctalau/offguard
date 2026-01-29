@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<test name="ReadmeExampleStackTrace" expectedWarnings="0">
+  <obfuscated>
+    <line>java.lang.NullPointerException</line>
+    <line>    at a.a(Unknown Source:10)</line>
+    <line>    at b.b(Unknown Source:20)</line>
+  </obfuscated>
+  <mapping>
+    <line>com.example.MyClass -&gt; a:</line>
+    <line>    1:1:void doThing():42:42 -&gt; a</line>
+    <line>com.example.Other -&gt; b:</line>
+    <line>    1:1:void run():12:12 -&gt; b</line>
+  </mapping>
+  <retraced>
+    <line>java.lang.NullPointerException</line>
+    <line>    at com.example.MyClass.a(Unknown Source:10)</line>
+    <line>    at com.example.Other.b(Unknown Source:20)</line>
+  </retraced>
+  <retracedVerbose>
+    <line>java.lang.NullPointerException</line>
+    <line>    at com.example.MyClass.a(Unknown Source:10)</line>
+    <line>    at com.example.Other.b(Unknown Source:20)</line>
+  </retracedVerbose>
+</test>

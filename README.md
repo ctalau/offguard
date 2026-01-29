@@ -101,6 +101,19 @@ This project is developed with comprehensive test coverage based on R8 test case
 - `npm run format` - Format code
 - `npm run typecheck` - Type check code
 
+### Adding fixtures, syncing Java retrace output, and bumping versions
+
+1. **Capture Java retrace output** for the new scenario using the Java test harness:
+   - Create/collect the mapping and stack trace files.
+   - Run `cd java-tests && gradle runExample --args "<mapping> <stacktrace>"` to get the ProGuard output.
+2. **Add a fixture** in `src/fixtures/xml/` using the Java output for `<retraced>` (and `<retracedVerbose>` if needed).
+   - Update the fixture count in `src/tests/retrace.test.ts` after adding a new XML file.
+3. **Align the TypeScript retrace behavior** with the Java output.
+   - Run `npm test` to confirm the new fixture passes.
+4. **Update the Java sources** when the upstream ProGuard implementation changes:
+   - Run `./scripts/download-proguard-sources.sh` to refresh `proguard-sources/`.
+5. **Bump the project version** in `package.json` and `package-lock.json` after behavior changes or new fixtures.
+
 ## License
 
 MIT
