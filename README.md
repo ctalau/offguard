@@ -77,6 +77,29 @@ const result = retrace(stackTrace, mapping);
 console.log(result);
 ```
 
+## Playground (React demo)
+
+This repo includes a small React app in `demo/` for trying the retrace API with either
+custom inputs or preloaded fixtures. The published npm package remains unchanged because
+the npm `files` list only includes `dist/`.
+
+### Run locally
+
+```bash
+cd demo
+npm install
+npm run dev
+```
+
+### Deploy to Vercel
+
+1. Create a new Vercel project and point it at this repository.
+2. Set the **Root Directory** to `demo`.
+3. Use the default Vite settings:
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+4. Deploy.
+
 ## Development
 
 This project is developed with comprehensive test coverage based on R8 test cases.
