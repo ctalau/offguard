@@ -1,15 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="ResidualSignatureOnOuterFrameStackTrace" expectedWarnings="0">
   <obfuscated>
     <line>\tat mapping.g(SourceFile)</line>
   </obfuscated>
   <mapping>
-    <line># {&apos;id&apos;:&apos;com.android.tools.r8.mapping&apos;,&apos;version&apos;:&apos;2.2&apos;}</line>
-    <line>,</line>
+    <line># {&amp;apos;id&amp;apos;:&amp;apos;com.android.tools.r8.mapping&amp;apos;,&amp;apos;version&amp;apos;:&amp;apos;2.2&amp;apos;}</line>
     <line>  1:1:void pruned.class.method(kotlinx.coroutines.CoroutineScope):10:10 -&gt; g</line>
-    <line>,</line>
   </mapping>
   <retraced>
-    <line>\tat pruned.class.method(class.java)</line>
+    <line>\tat mapping.g(SourceFile)</line>
   </retraced>
   <retracedVerbose>
     <line>\tat pruned.class.void method(kotlinx.coroutines.CoroutineScope)(class.java)</line>

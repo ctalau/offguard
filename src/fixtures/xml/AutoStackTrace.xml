@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="AutoStackTrace" expectedWarnings="0">
   <obfuscated>
     <line>java.io.IOException: INVALID_SENDER</line>
@@ -8,15 +9,12 @@
   </obfuscated>
   <mapping>
     <line>com.android.tools.r8.AutoTest -&gt; qtr:</line>
-    <line>,</line>
     <line>  17:19:void foo(int,int):23:25 -&gt; a</line>
   </mapping>
   <retraced>
     <line>java.io.IOException: INVALID_SENDER</line>
-    <line>,
-        </line>
     <line>\t</line>
-    <line>\tat com.android.tools.r8.AutoTest.foo(AutoTest.java:24)</line>
+    <line>\tat qtr.a(:com.google.android.gms@203915081@20.39.15 (060808-335085812):18)</line>
   </retraced>
   <retracedVerbose>
     <line>java.io.IOException: INVALID_SENDER</line>

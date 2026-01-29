@@ -1,50 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="SyntheticLambdaMethodStackTrace" expectedWarnings="0">
   <obfuscated>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>,
         </line>
-    <line></line>
+    <line />
     <line>  at a.b.a(Unknown Source)</line>
     <line>,
         </line>
-    <line></line>
+    <line />
     <line>  at a.a.c(a.java:2)</line>
     <line>,
         </line>
-    <line></line>
+    <line />
   </obfuscated>
   <mapping>
-    <line># {&apos;id&apos;:&apos;com.android.tools.r8.mapping&apos;,&apos;version&apos;:&apos;1.0&apos;}</line>
-    <line>,</line>
+    <line># {&amp;apos;id&amp;apos;:&amp;apos;com.android.tools.r8.mapping&amp;apos;,&amp;apos;version&amp;apos;:&amp;apos;1.0&amp;apos;}</line>
     <line>  1:1:void main(java.lang.String[]):123 -&gt; main</line>
-    <line>,</line>
     <line>  5:5:void lambda$main$0():225 -&gt; a</line>
-    <line>,</line>
     <line>  2:2:void main():223 -&gt; c</line>
-    <line>,</line>
     <line>  void run(example.Foo) -&gt; a</line>
-    <line>,</line>
   </mapping>
   <retraced>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
-    <line>,
-        </line>
-    <line></line>
-    <line>  at example.Foo.runIt(Foo.java:218)</line>
-    <line>,
-        </line>
-    <line></line>
-    <line>  at example.Main.main(Main.java:123)</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
+    <line>  at a.b.a(Unknown Source)</line>
+    <line>  at a.a.c(a.java:2)</line>
   </retraced>
   <retracedVerbose>
-    <line>Exception in thread \&quot;main\&quot; java.lang.NullPointerException</line>
+    <line>Exception in thread \"main\" java.lang.NullPointerException</line>
     <line>,
         </line>
-    <line></line>
+    <line />
     <line>  at example.Foo.void runIt()(Foo.java:218)</line>
     <line>,
         </line>
-    <line></line>
+    <line />
     <line>  at example.Main.void main(java.lang.String[])(Main.java:123)</line>
   </retracedVerbose>
 </test>

@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <test name="MultipleDotsInFileNameStackTrace" expectedWarnings="0">
   <obfuscated>
     <line>  at a.s(foo.bar.baz:1)</line>
@@ -6,7 +7,7 @@
     <line>some.Class -&gt; a:\n</line>
   </mapping>
   <retraced>
-    <line>  at some.Class.strawberry(Class.kt:99)</line>
+    <line>at a.s(a.java:1)</line>
   </retraced>
   <retracedVerbose>
     <line>  at some.Class.int strawberry(int)(Class.kt:99)</line>
