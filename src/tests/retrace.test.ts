@@ -7,11 +7,11 @@ describe('retrace', () => {
     expect(retrace).toBeDefined();
   });
 
-  it('should return input stack trace (placeholder)', () => {
+  it('should process basic retrace', () => {
     const stackTrace = 'Example stack trace';
     const mapping = 'Example mapping';
     const result = retrace(stackTrace, mapping);
-    expect(result).toBe(stackTrace);
+    expect(typeof result).toBe('string');
   });
 
   describe('fixture tests', () => {
@@ -63,9 +63,8 @@ describe('retrace', () => {
         // Verify return type
         expect(typeof result!).toBe('string');
 
-        // For ProGuard-compatible fixtures, once implementation is complete,
-        // uncomment this to verify against expected output:
-        // expect(result).toBe(fixture.retraced);
+        // For ProGuard-compatible fixtures, verify against expected output
+        expect(result).toBe(fixture.retraced);
       });
     });
   });
