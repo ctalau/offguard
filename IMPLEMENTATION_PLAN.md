@@ -153,8 +153,8 @@ From the same data
 
 ### 7.1 CI Workflow
 Create `.github/workflows/ci.yml`:
-- [ ] Run on: push, pull_request
-- [ ] Jobs:
+- [x] Run on: push, pull_request
+- [x] Jobs:
   - Lint and format check
   - Type checking
   - Run test suite
@@ -163,7 +163,7 @@ Create `.github/workflows/ci.yml`:
 
 ### 7.2 Release & Publish Workflow
 
-Another gh workflow on tag. 
+- [x] Another gh workflow on tag. 
 
 ## Success Criteria
 

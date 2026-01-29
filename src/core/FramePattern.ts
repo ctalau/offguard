@@ -17,11 +17,7 @@ export class FramePattern {
   private static readonly REGEX_TYPE = FramePattern.REGEX_CLASS + '(?:\\[\\])*';
   private static readonly REGEX_MEMBER = '<?[^\\s":./()]+>?';
   private static readonly REGEX_ARGUMENTS =
-    '(?:' +
-    FramePattern.REGEX_TYPE +
-    '(?:\\s*,\\s*' +
-    FramePattern.REGEX_TYPE +
-    ')*)?';
+    '(?:' + FramePattern.REGEX_TYPE + '(?:\\s*,\\s*' + FramePattern.REGEX_TYPE + ')*)?';
 
   private readonly expressionTypes: string[] = [];
   private readonly pattern: RegExp;
@@ -173,15 +169,7 @@ export class FramePattern {
       }
     }
 
-    return new FrameInfo(
-      className,
-      sourceFile,
-      lineNumber,
-      type,
-      fieldName,
-      methodName,
-      args
-    );
+    return new FrameInfo(className, sourceFile, lineNumber, type, fieldName, methodName, args);
   }
 
   /**
@@ -228,9 +216,7 @@ export class FramePattern {
             break;
 
           case 'C':
-            formattedBuffer += ClassUtil.internalClassName(
-              frameInfo.className || ''
-            );
+            formattedBuffer += ClassUtil.internalClassName(frameInfo.className || '');
             break;
 
           case 's':

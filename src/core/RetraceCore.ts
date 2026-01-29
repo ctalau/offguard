@@ -20,8 +20,7 @@ export class ReTrace {
 
   // For example: "at o.afc.b + 45(:45)"
   // Might be present in recent stacktraces accessible from crashlytics.
-  private static readonly REGULAR_EXPRESSION_OPTIONAL_SOURCE_LINE_INFO =
-    '(?:\\+\\s+[0-9]+)?';
+  private static readonly REGULAR_EXPRESSION_OPTIONAL_SOURCE_LINE_INFO = '(?:\\+\\s+[0-9]+)?';
 
   // For example: "    at com.example.Foo.bar(Foo.java:123:0) ~[0]"
   private static readonly REGULAR_EXPRESSION_AT =
@@ -98,8 +97,7 @@ export class ReTrace {
   // We need to call another regex because Java 16 stacktrace may have multiple methods in the same line.
   // For Example: java.lang.NullPointerException: Cannot invoke "dev.lone.itemsadder.Core.f.a.b.b.b.c.a(org.bukkit.Location, boolean)" because the return value of "dev.lone.itemsadder.Core.f.a.b.b.b.c.a()" is null
   //TODO: Make this stuff less hacky.
-  static readonly REGULAR_EXPRESSION2 =
-    '(?:' + ReTrace.REGULAR_EXPRESSION_RETURN_VALUE_NULL2 + ')';
+  static readonly REGULAR_EXPRESSION2 = '(?:' + ReTrace.REGULAR_EXPRESSION_RETURN_VALUE_NULL2 + ')';
 
   // The settings.
   private readonly regularExpression: string;
@@ -116,10 +114,8 @@ export class ReTrace {
     allClassNames?: boolean,
     verbose?: boolean
   ) {
-    this.regularExpression =
-      regularExpression || ReTrace.REGULAR_EXPRESSION;
-    this.regularExpression2 =
-      regularExpression2 || ReTrace.REGULAR_EXPRESSION2;
+    this.regularExpression = regularExpression || ReTrace.REGULAR_EXPRESSION;
+    this.regularExpression2 = regularExpression2 || ReTrace.REGULAR_EXPRESSION2;
     this.allClassNames = allClassNames || false;
     this.verbose = verbose || false;
   }
@@ -161,11 +157,7 @@ export class ReTrace {
 
     const hasExceptionLine = result.some((line) => {
       const trimmed = line.trim();
-      return (
-        trimmed.length > 0 &&
-        !trimmed.startsWith(',') &&
-        !/^\s+at\b/.test(line)
-      );
+      return trimmed.length > 0 && !trimmed.startsWith(',') && !/^\s+at\b/.test(line);
     });
     const normalizedLines = hasExceptionLine
       ? result
@@ -185,9 +177,7 @@ export class ReTrace {
     obfuscatedLine: string
   ): string {
     const result: string[] = [];
-    const circularMatch = obfuscatedLine.match(
-      /^\s*\[CIRCULAR REFERENCE: ([^\]]+)\]/
-    );
+    const circularMatch = obfuscatedLine.match(/^\s*\[CIRCULAR REFERENCE: ([^\]]+)\]/);
     if (circularMatch) {
       const mappedClass = mapper.originalClassName(circularMatch[1]);
       if (mappedClass !== circularMatch[1]) {
@@ -201,10 +191,7 @@ export class ReTrace {
       obfuscatedFrame.sourceFile !== 'Unknown Source' &&
       obfuscatedFrame.sourceFile !== 'SourceFile' &&
       obfuscatedFrame.methodName !== null &&
-      mapper.hasMethodMapping(
-        obfuscatedFrame.className || '',
-        obfuscatedFrame.methodName
-      )
+      mapper.hasMethodMapping(obfuscatedFrame.className || '', obfuscatedFrame.methodName)
     ) {
       return obfuscatedLine;
     }
@@ -244,10 +231,7 @@ export class ReTrace {
       } else {
         if (obfuscatedFrame.methodName !== null) {
           const className = obfuscatedFrame.className || '';
-          const hasMethodMapping = mapper.hasMethodMapping(
-            className,
-            obfuscatedFrame.methodName
-          );
+          const hasMethodMapping = mapper.hasMethodMapping(className, obfuscatedFrame.methodName);
           const sourceFile = obfuscatedFrame.sourceFile ?? '';
           const shouldNormalizeSourceFile =
             !hasMethodMapping &&
@@ -274,8 +258,8 @@ export class ReTrace {
               obfuscatedFrame.sourceFile === 'Unknown Source'
                 ? 'Unknown Source'
                 : className
-                ? this.sourceFileName(className)
-                : obfuscatedFrame.sourceFile,
+                  ? this.sourceFileName(className)
+                  : obfuscatedFrame.sourceFile,
               obfuscatedFrame.lineNumber,
               obfuscatedFrame.type,
               obfuscatedFrame.fieldName,
@@ -391,9 +375,7 @@ export class ReTrace {
     const index1 = className.lastIndexOf('.') + 1;
     const index2 = className.indexOf('$', index1);
     return (
-      (index2 > 0
-        ? className.substring(index1, index2)
-        : className.substring(index1)) + '.java'
+      (index2 > 0 ? className.substring(index1, index2) : className.substring(index1)) + '.java'
     );
   }
 }
