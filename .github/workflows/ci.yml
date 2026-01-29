@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify package install
+        run: |
+          PACKAGE_TGZ=$(npm pack --silent)
+          mkdir -p /tmp/offguard-smoke
+          cd /tmp/offguard-smoke
+          npm init -y >/dev/null 2>&1
+          npm install "${GITHUB_WORKSPACE}/${PACKAGE_TGZ}"
+          node --input-type=module -e "import('@ctalau/offguard').then((mod) => console.log(Object.keys(mod)))"
