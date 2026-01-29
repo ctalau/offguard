@@ -30,3 +30,9 @@ task runTests(type: JavaExec) {
     mainClass = 'com.offguard.TestRunner'
     workingDir = projectDir
 }
+
+task runExample(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.offguard.ExampleMain'
+    workingDir = projectDir
+}

@@ -1,6 +1,6 @@
 {
   "name": "@ctalau/offguard",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeScript port of the ProGuard retrace tool for deobfuscating stack traces",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -24,7 +24,6 @@
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
     "format": "prettier --write \"src/**/*.ts\"",
-    "format:check": "prettier --check \"src/**/*.ts\"",
     "list": "node scripts/list-scripts.mjs",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run typecheck && npm run lint && npm run test && npm run build"

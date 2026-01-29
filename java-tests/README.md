@@ -15,6 +15,7 @@ java-tests/
 ├── src/
 │   └── main/java/
 │       └── com/offguard/
+│           ├── ExampleMain.java        # Example-based retrace runner
 │           ├── SimpleXmlParser.java    # XML fixture parser (no external deps)
 │           ├── TestRunner.java         # Standalone test runner
 │           └── RetraceTestRunner.java  # Alternative runner
@@ -57,6 +58,13 @@ These sources are committed to the repository for reproducibility. To refresh th
 ```bash
 cd java-tests
 gradle runTests
+```
+
+### Run the README example in Java
+
+```bash
+cd java-tests
+gradle runExample --args "<path-to-mapping> <path-to-stacktrace>"
 ```
 
 ### Expected Output
