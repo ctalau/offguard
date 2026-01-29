@@ -11,15 +11,22 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-dependencies {
-    // No external dependencies needed - using bundled ProGuard source
+sourceSets {
+    main {
+        java {
+            // Use downloaded ProGuard sources
+            srcDirs = ['../proguard-sources', 'src/main/java']
+        }
+    }
 }
 
-test {
-    useJUnitPlatform()
-    testLogging {
-        events "passed", "skipped", "failed"
-        exceptionFormat "full"
-        showStandardStreams = true
-    }
+dependencies {
+    // No external dependencies - using built-in XML parsing
+}
+
+// Custom task to run our test runner
+task runTests(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.offguard.TestRunner'
+    workingDir = projectDir
 }
