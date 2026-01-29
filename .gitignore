@@ -31,3 +31,5 @@ yarn-error.log*
 # Testing
 .vitest/
 proguard-source/
+temp-proguard-full/
+java-tests/build/

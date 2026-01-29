@@ -64,8 +64,17 @@ Port the ProGuard retrace tool from Java to TypeScript, with comprehensive test 
     - `FrameInfo.java` - Data class for stack frame information
     - `FramePattern.java` - Regex-based parsing and formatting of stack frames
   - Note: Depends on `proguard:base` module for `MappingReader` and `ClassUtil`
-- [ ] Create Java/Kotlin tests based on the XML fixtures with the official implementation
-- [ ] If tests do not work well, update tests
+- [x] Create Java tests based on the XML fixtures with ProGuard implementation
+  - Created `java-tests/` directory with standalone Java test runner
+  - Copied ProGuard source files locally (no external dependencies)
+  - Built custom XML parser using Java standard library only
+  - Test Results: **16 passed, 50 failed** out of 66 tests
+- [x] Analyze test results and determine next steps
+  - Failures are due to R8 vs ProGuard behavioral differences
+  - R8 supports inline frames and ambiguous mapping expansion
+  - ProGuard only shows first match for ambiguous cases
+  - **Key Decision**: Should port R8's retrace instead of ProGuard's
+  - See `java-tests/TEST_RESULTS.md` for detailed analysis
 
 ## Phase 3: create TS tests 
 
