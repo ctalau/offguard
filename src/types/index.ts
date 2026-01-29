@@ -1,8 +1,13 @@
 /**
- * Type definitions for the ProGuard retrace library
+ * Type definitions for the ProGuard retrace library.
  */
 
-// Placeholder types - will be expanded during implementation
+/**
+ * Optional configuration for retracing.
+ */
 export interface RetraceOptions {
+  /**
+   * When enabled, includes additional retrace diagnostics in the output.
+   */
   verbose?: boolean;
 }

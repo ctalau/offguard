@@ -4,12 +4,12 @@
   "description": "TypeScript port of the ProGuard retrace tool for deobfuscating stack traces",
   "type": "module",
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },
@@ -17,7 +17,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean --minify --target node18 && node scripts/rename-esm.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -30,8 +30,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://local_proxy@127.0.0.1:51738/git/ctalau/offguard"
+    "url": "https://github.com/ctalau/offguard.git"
   },
+  "bugs": {
+    "url": "https://github.com/ctalau/offguard/issues"
+  },
+  "homepage": "https://github.com/ctalau/offguard#readme",
   "keywords": [
     "proguard",
     "retrace",
