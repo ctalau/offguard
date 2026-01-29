@@ -200,6 +200,8 @@ export class MappingReader {
       let lastLineNumber = 0;
       let newFirstLineNumber = 0;
       let newLastLineNumber = 0;
+      const hasObfuscatedLineInfo = colonIndex2 >= 0;
+      const hasOriginalLineInfo = colonIndex3 >= 0;
 
       if (colonIndex2 >= 0) {
         firstLineNumber = newFirstLineNumber = parseInt(
@@ -210,6 +212,10 @@ export class MappingReader {
           line.substring(colonIndex1 + 1, colonIndex2).trim(),
           10
         );
+        if (colonIndex3 < 0) {
+          firstLineNumber = 0;
+          lastLineNumber = 0;
+        }
       }
 
       if (colonIndex3 >= 0) {
@@ -237,7 +243,9 @@ export class MappingReader {
         newClassName,
         newFirstLineNumber,
         newLastLineNumber,
-        newName
+        newName,
+        hasObfuscatedLineInfo,
+        hasOriginalLineInfo
       );
     }
   }

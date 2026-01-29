@@ -57,6 +57,8 @@ export interface MappingProcessor {
     newClassName: string,
     newFirstLineNumber: number,
     newLastLineNumber: number,
-    newMethodName: string
+    newMethodName: string,
+    hasObfuscatedLineInfo: boolean,
+    hasOriginalLineInfo: boolean
   ): void;
 }

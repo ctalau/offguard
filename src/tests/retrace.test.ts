@@ -17,36 +17,12 @@ describe('retrace', () => {
   describe('fixture tests', () => {
     const fixtures = loadAllFixtures();
 
-    // ProGuard-compatible fixtures (expected to pass once implementation is complete)
-    const proguardCompatible = [
-      'ClassWithDashStackTrace',
-      'ColonInFileNameStackTrace',
-      'FileNameExtensionStackTrace',
-      'FoundMethodVerboseStackTrace',
-      'IdentityMappingStackTrace',
-      'InvalidStackTrace',
-      'MapVersionWarningStackTrace',
-      'MultipleDotsInFileNameStackTrace',
-      'MultipleMapVersionsWarningStackTrace',
-      'NullStackTrace',
-      'PGStackTrace',
-      'SuppressedStackTrace',
-      'TrailingWhitespaceStackTrace',
-      'UnicodeInFileNameStackTrace',
-      'UnknownSourceStackTrace',
-      'VerboseUnknownStackTrace',
-    ];
-
     it('should have loaded all 66 fixtures', () => {
       expect(fixtures.length).toBe(66);
     });
 
     fixtures.forEach((fixture) => {
-      const isR8Specific = !proguardCompatible.includes(fixture.name);
-      const testFn = isR8Specific ? it.skip : it;
-      const suffix = isR8Specific ? ' (R8-specific, skipped)' : '';
-
-      testFn(`${fixture.name}${suffix}`, () => {
+      it(`${fixture.name}`, () => {
         // Validate test data is complete
         expect(fixture.name).toBeTruthy();
         expect(fixture.obfuscated).toBeDefined();
