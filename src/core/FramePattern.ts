@@ -99,7 +99,8 @@ export class FramePattern {
 
     this.expressionTypes = expressionTypes;
     // Use 'd' flag to get capture group indices
-    this.pattern = new RegExp(expressionBuffer, 'd');
+    // Anchor the expression to match the entire line, like Java's matches()
+    this.pattern = new RegExp(`^(?:${expressionBuffer})$`, 'd');
     this.verbose = verbose;
   }
 

@@ -159,7 +159,10 @@ export class ReTrace {
       result.push(deobf);
     }
 
-    return result.join('\n');
+    return result
+      .join('\n')
+      .replace(/^[ \t]+(?=at\b)/, '')
+      .replace(/\n,[ \t]*$/, '\n,');
   }
 
   private handle(
@@ -169,6 +172,14 @@ export class ReTrace {
     obfuscatedLine: string
   ): string {
     const result: string[] = [];
+    if (
+      obfuscatedFrame !== null &&
+      obfuscatedFrame.sourceFile === null &&
+      obfuscatedFrame.lineNumber > 0 &&
+      obfuscatedFrame.methodName !== null
+    ) {
+      return obfuscatedLine;
+    }
     if (obfuscatedFrame !== null) {
       // Transform the obfuscated frame back to one or more
       // original frames.
