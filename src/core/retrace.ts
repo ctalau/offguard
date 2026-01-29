@@ -1,4 +1,4 @@
-import { ReTrace } from './ReTrace';
+import { ReTrace } from './RetraceCore';
 
 /**
  * Main retrace function

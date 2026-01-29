@@ -31,13 +31,13 @@ describe('retrace', () => {
         expect(fixture.expectedWarnings).toBeGreaterThanOrEqual(0);
 
         // Test retrace function
-        let result: string;
+        let result = '';
         expect(() => {
           result = retrace(fixture.obfuscated, fixture.mapping);
         }).not.toThrow();
 
         // Verify return type
-        expect(typeof result!).toBe('string');
+        expect(typeof result).toBe('string');
 
         // For ProGuard-compatible fixtures, verify against expected output
         expect(result).toBe(fixture.retraced);
