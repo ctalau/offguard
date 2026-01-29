@@ -3,7 +3,12 @@ import { retrace } from '@ctalau/offguard';
 import { fixtures } from './fixtures';
 import './styles.css';
 
-const defaultFixture = fixtures[0];
+const defaultFixture = fixtures[0] ?? {
+  id: '',
+  label: '',
+  stack: '',
+  mapping: '',
+};
 
 export const App = () => {
   const [selectedFixtureId, setSelectedFixtureId] = useState(defaultFixture.id);
@@ -58,21 +63,19 @@ export const App = () => {
           </p>
         </div>
         <div className="controls">
-          <p className="field-label">Examples</p>
-          <div className="example-list">
-            {fixtures.map((fixture) => (
-              <button
-                key={fixture.id}
-                type="button"
-                className={`button secondary example-button${
-                  fixture.id === selectedFixtureId ? ' example-button--active' : ''
-                }`}
-                onClick={() => handleLoadFixture(fixture.id)}
-              >
-                {fixture.label}
-              </button>
-            ))}
-          </div>
+          <label className="field">
+            <span>Example fixture</span>
+            <select
+              value={selectedFixtureId}
+              onChange={(event) => handleLoadFixture(event.target.value)}
+            >
+              {fixtures.map((fixture) => (
+                <option key={fixture.id} value={fixture.id}>
+                  {fixture.label}
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
       </header>
 
