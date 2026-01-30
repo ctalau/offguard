@@ -1,5 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useRef } from 'react';
 import { retrace } from '@ctalau/offguard';
+import JSZip from 'jszip';
 import { fixtures } from './fixtures';
 import './styles.css';
 
@@ -11,6 +12,8 @@ export const App = () => {
   const [mapping, setMapping] = useState(defaultFixture.mapping);
   const [output, setOutput] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isDragging, setIsDragging] = useState(false);
+  const mappingTextareaRef = useRef<HTMLTextAreaElement>(null);
 
   const selectedFixture = useMemo(
     () => fixtures.find((fixture) => fixture.id === selectedFixtureId),
@@ -46,6 +49,63 @@ export const App = () => {
     setMapping('');
     setOutput('');
     setErrorMessage('');
+  };
+
+  const handleDragEnter = (event: React.DragEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragOver = (event: React.DragEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
+  const handleDragLeave = (event: React.DragEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = async (event: React.DragEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIsDragging(false);
+
+    const files = Array.from(event.dataTransfer.files);
+    if (files.length === 0) {
+      return;
+    }
+
+    const file = files[0];
+
+    try {
+      // Handle zip files
+      if (file.name.endsWith('.zip')) {
+        const arrayBuffer = await file.arrayBuffer();
+        const zip = await JSZip.loadAsync(arrayBuffer);
+
+        // Find the first .txt or .map file in the zip
+        const mappingFile = Object.keys(zip.files).find(
+          (filename) => filename.endsWith('.txt') || filename.endsWith('.map')
+        );
+
+        if (mappingFile) {
+          const content = await zip.files[mappingFile].async('text');
+          setMapping(content);
+        } else {
+          setErrorMessage('No .txt or .map file found in the zip archive');
+        }
+      } else {
+        // Handle plain text files
+        const text = await file.text();
+        setMapping(text);
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      setErrorMessage(`Error reading file: ${message}`);
+    }
   };
 
   return (
@@ -103,11 +163,17 @@ export const App = () => {
               />
             </label>
             <label className="field">
-              <span>Mapping file</span>
+              <span>Mapping file (paste, or drag & drop a .txt or .zip file)</span>
               <textarea
+                ref={mappingTextareaRef}
                 value={mapping}
                 onChange={(event) => setMapping(event.target.value)}
-                placeholder="Paste the ProGuard/R8 mapping file here"
+                onDragEnter={handleDragEnter}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                className={isDragging ? 'drag-over' : ''}
+                placeholder="Paste the ProGuard/R8 mapping file here, or drag & drop a file"
                 rows={10}
               />
             </label>
